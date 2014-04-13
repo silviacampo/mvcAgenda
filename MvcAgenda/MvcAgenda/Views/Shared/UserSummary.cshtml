@@ -1,0 +1,14 @@
+﻿@model MvcAgenda.Domain.Entities.user
+
+<fieldset>
+    <legend>user</legend>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.username)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.email)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) 
+</p>

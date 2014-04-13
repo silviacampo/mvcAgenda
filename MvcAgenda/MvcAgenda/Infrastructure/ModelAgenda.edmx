@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="agendaModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="agendaModelStoreContainer">
+          <EntitySet Name="aevent" EntityType="agendaModel.Store.aevent" store:Type="Tables" Schema="agenda" />
+          <EntitySet Name="comment" EntityType="agendaModel.Store.comment" store:Type="Tables" Schema="agenda" />
+          <EntitySet Name="friend" EntityType="agendaModel.Store.friend" store:Type="Tables" Schema="agenda" />
+          <EntitySet Name="location" EntityType="agendaModel.Store.location" store:Type="Tables" Schema="agenda" />
+          <EntitySet Name="user" EntityType="agendaModel.Store.user" store:Type="Tables" Schema="agenda" />
+          <AssociationSet Name="aevent_ibfk_1" Association="agendaModel.Store.aevent_ibfk_1">
+            <End Role="user" EntitySet="user" />
+            <End Role="aevent" EntitySet="aevent" />
+          </AssociationSet>
+          <AssociationSet Name="aevent_ibfk_2" Association="agendaModel.Store.aevent_ibfk_2">
+            <End Role="location" EntitySet="location" />
+            <End Role="aevent" EntitySet="aevent" />
+          </AssociationSet>
+          <AssociationSet Name="comment_ibfk_2" Association="agendaModel.Store.comment_ibfk_2">
+            <End Role="user" EntitySet="user" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="comment_ibfk_3" Association="agendaModel.Store.comment_ibfk_3">
+            <End Role="aevent" EntitySet="aevent" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="friend_ibfk_1" Association="agendaModel.Store.friend_ibfk_1">
+            <End Role="user" EntitySet="user" />
+            <End Role="friend" EntitySet="friend" />
+          </AssociationSet>
+          <AssociationSet Name="friend_ibfk_2" Association="agendaModel.Store.friend_ibfk_2">
+            <End Role="user" EntitySet="user" />
+            <End Role="friend" EntitySet="friend" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="aevent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="location_id" Type="int" Nullable="false" />
+          <Property Name="startTime" Type="datetime" Nullable="false" />
+          <Property Name="endTime" Type="datetime" />
+          <Property Name="url" Type="varchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="event_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="friend">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="user1_id" Type="int" Nullable="false" />
+          <Property Name="user2_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="city" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="country" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="timezone" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="password" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="email" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <Association Name="aevent_ibfk_1">
+          <End Role="user" Type="agendaModel.Store.user" Multiplicity="1" />
+          <End Role="aevent" Type="agendaModel.Store.aevent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="aevent">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="aevent_ibfk_2">
+          <End Role="location" Type="agendaModel.Store.location" Multiplicity="1" />
+          <End Role="aevent" Type="agendaModel.Store.aevent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="aevent">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="comment_ibfk_2">
+          <End Role="user" Type="agendaModel.Store.user" Multiplicity="1" />
+          <End Role="comment" Type="agendaModel.Store.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="comment_ibfk_3">
+          <End Role="aevent" Type="agendaModel.Store.aevent" Multiplicity="1" />
+          <End Role="comment" Type="agendaModel.Store.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aevent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="friend_ibfk_1">
+          <End Role="user" Type="agendaModel.Store.user" Multiplicity="1" />
+          <End Role="friend" Type="agendaModel.Store.friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friend">
+              <PropertyRef Name="user1_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="friend_ibfk_2">
+          <End Role="user" Type="agendaModel.Store.user" Multiplicity="1" />
+          <End Role="friend" Type="agendaModel.Store.friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friend">
+              <PropertyRef Name="user2_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="agendaModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="agendaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="aevents" EntityType="agendaModel.aevent" />
+          <EntitySet Name="comments" EntityType="agendaModel.comment" />
+          <EntitySet Name="friends" EntityType="agendaModel.friend" />
+          <EntitySet Name="locations" EntityType="agendaModel.location" />
+          <EntitySet Name="users" EntityType="agendaModel.user" />
+          <AssociationSet Name="aevent_ibfk_1" Association="agendaModel.aevent_ibfk_1">
+            <End Role="user" EntitySet="users" />
+            <End Role="aevent" EntitySet="aevents" />
+          </AssociationSet>
+          <AssociationSet Name="aevent_ibfk_2" Association="agendaModel.aevent_ibfk_2">
+            <End Role="location" EntitySet="locations" />
+            <End Role="aevent" EntitySet="aevents" />
+          </AssociationSet>
+          <AssociationSet Name="comment_ibfk_1" Association="agendaModel.comment_ibfk_1">
+            <End Role="aevent" EntitySet="aevents" />
+            <End Role="comment" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="comment_ibfk_2" Association="agendaModel.comment_ibfk_2">
+            <End Role="user" EntitySet="users" />
+            <End Role="comment" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="friend_ibfk_1" Association="agendaModel.friend_ibfk_1">
+            <End Role="user" EntitySet="users" />
+            <End Role="friend" EntitySet="friends" />
+          </AssociationSet>
+          <AssociationSet Name="friend_ibfk_2" Association="agendaModel.friend_ibfk_2">
+            <End Role="user" EntitySet="users" />
+            <End Role="friend" EntitySet="friends" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="aevent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="false" />
+          <Property Type="String" Name="description" />
+          <Property Type="Int32" Name="user_id" Nullable="false" DefaultValue="0" />
+          <Property Type="Int32" Name="location_id" Nullable="false" />
+          <Property Type="DateTime" Name="startTime" Nullable="false" />
+          <Property Type="DateTime" Name="endTime" />
+          <Property Type="String" Name="url" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="agendaModel.aevent_ibfk_1" FromRole="aevent" ToRole="user" />
+          <NavigationProperty Name="location" Relationship="agendaModel.aevent_ibfk_2" FromRole="aevent" ToRole="location" />
+          <NavigationProperty Name="comments" Relationship="agendaModel.comment_ibfk_1" FromRole="aevent" ToRole="comment" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="description" Nullable="false" />
+          <Property Type="Int32" Name="event_id" Nullable="false" DefaultValue="0" />
+          <Property Type="Int32" Name="user_id" Nullable="false" DefaultValue="0" />
+          <NavigationProperty Name="aevent" Relationship="agendaModel.comment_ibfk_1" FromRole="comment" ToRole="aevent" />
+          <NavigationProperty Name="user" Relationship="agendaModel.comment_ibfk_2" FromRole="comment" ToRole="user" />
+        </EntityType>
+        <EntityType Name="friend">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="user1_id" Nullable="false" />
+          <Property Type="Int32" Name="user2_id" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="agendaModel.friend_ibfk_1" FromRole="friend" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="agendaModel.friend_ibfk_2" FromRole="friend" ToRole="user" />
+        </EntityType>
+        <EntityType Name="location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="city" Nullable="false" />
+          <Property Type="String" Name="country" Nullable="false" />
+          <Property Type="Int32" Name="timezone" Nullable="false" />
+          <NavigationProperty Name="aevents" Relationship="agendaModel.aevent_ibfk_2" FromRole="location" ToRole="aevent" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="username" Nullable="false" />
+          <Property Type="String" Name="password" Nullable="false" />
+          <Property Type="String" Name="email" Nullable="false" />
+          <NavigationProperty Name="aevents" Relationship="agendaModel.aevent_ibfk_1" FromRole="user" ToRole="aevent" />
+          <NavigationProperty Name="comments" Relationship="agendaModel.comment_ibfk_2" FromRole="user" ToRole="comment" />
+          <NavigationProperty Name="friends" Relationship="agendaModel.friend_ibfk_1" FromRole="user" ToRole="friend" />
+          <NavigationProperty Name="friends1" Relationship="agendaModel.friend_ibfk_2" FromRole="user" ToRole="friend" />
+        </EntityType>
+        <Association Name="aevent_ibfk_1">
+          <End Type="agendaModel.user" Role="user" Multiplicity="1" />
+          <End Type="agendaModel.aevent" Role="aevent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="aevent">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="aevent_ibfk_2">
+          <End Type="agendaModel.location" Role="location" Multiplicity="1" />
+          <End Type="agendaModel.aevent" Role="aevent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="aevent">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="comment_ibfk_1">
+          <End Type="agendaModel.aevent" Role="aevent" Multiplicity="1" />
+          <End Type="agendaModel.comment" Role="comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aevent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="comment_ibfk_2">
+          <End Type="agendaModel.user" Role="user" Multiplicity="1" />
+          <End Type="agendaModel.comment" Role="comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="friend_ibfk_1">
+          <End Type="agendaModel.user" Role="user" Multiplicity="1" />
+          <End Type="agendaModel.friend" Role="friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friend">
+              <PropertyRef Name="user1_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="friend_ibfk_2">
+          <End Type="agendaModel.user" Role="user" Multiplicity="1" />
+          <End Type="agendaModel.friend" Role="friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friend">
+              <PropertyRef Name="user2_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="agendaModelStoreContainer" CdmEntityContainer="agendaEntities">
+          <EntitySetMapping Name="aevents">
+            <EntityTypeMapping TypeName="agendaModel.aevent">
+              <MappingFragment StoreEntitySet="aevent">
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="agendaModel.comment">
+              <MappingFragment StoreEntitySet="comment">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="event_id" ColumnName="event_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="friends">
+            <EntityTypeMapping TypeName="agendaModel.friend">
+              <MappingFragment StoreEntitySet="friend">
+                <ScalarProperty Name="user2_id" ColumnName="user2_id" />
+                <ScalarProperty Name="user1_id" ColumnName="user1_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="locations">
+            <EntityTypeMapping TypeName="agendaModel.location">
+              <MappingFragment StoreEntitySet="location">
+                <ScalarProperty Name="timezone" ColumnName="timezone" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="agendaModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="ModelAgenda">
+        <EntityTypeShape EntityType="agendaModel.aevent" Width="1.5" PointX="0.75" PointY="0.75" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="agendaModel.comment" Width="1.5" PointX="7" PointY="1.75" Height="2.172587890625" />
+        <EntityTypeShape EntityType="agendaModel.friend" Width="1.5" PointX="2.75" PointY="3.75" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="agendaModel.location" Width="1.5" PointX="4.75" PointY="0.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="agendaModel.user" Width="1.5" PointX="8.25" PointY="4.5" Height="2.5571907552083326" />
+        <AssociationConnector Association="agendaModel.aevent_ibfk_1" >
+          <ConnectorPoint PointX="8.25" PointY="6.4249886067708317" />
+          <ConnectorPoint PointX="1.5" PointY="6.4249886067708317" />
+          <ConnectorPoint PointX="1.5" PointY="3.8840950520833331" />
+        </AssociationConnector>
+        <AssociationConnector Association="agendaModel.aevent_ibfk_2" >
+          <ConnectorPoint PointX="4.75" PointY="1.7401432291666672" />
+          <ConnectorPoint PointX="2.25" PointY="1.7401432291666672" />
+        </AssociationConnector>
+        <AssociationConnector Association="agendaModel.comment_ibfk_1" >
+          <ConnectorPoint PointX="2.25" PointY="3.2401432291666667" />
+          <ConnectorPoint PointX="7" PointY="3.2401432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="agendaModel.comment_ibfk_2" >
+          <ConnectorPoint PointX="9" PointY="4.5" />
+          <ConnectorPoint PointX="9" PointY="4.297587890625" />
+          <ConnectorPoint PointX="7.75" PointY="4.297587890625" />
+          <ConnectorPoint PointX="7.75" PointY="3.922587890625" />
+        </AssociationConnector>
+        <AssociationConnector Association="agendaModel.friend_ibfk_1" >
+          <ConnectorPoint PointX="8.25" PointY="5.1151432291666659" />
+          <ConnectorPoint PointX="4.25" PointY="5.1151432291666659" />
+        </AssociationConnector>
+        <AssociationConnector Association="agendaModel.friend_ibfk_2" >
+          <ConnectorPoint PointX="8.25" PointY="4.7450716145833329" />
+          <ConnectorPoint PointX="4.25" PointY="4.7450716145833329" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

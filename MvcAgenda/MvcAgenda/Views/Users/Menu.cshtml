@@ -1,0 +1,17 @@
+﻿@model IEnumerable<MvcAgenda.Domain.Entities.user>
+
+@{
+    Layout = null;
+    }
+
+    @Html.ActionLink("All", "index", "Events"):
+
+    @foreach (var item in Model)
+    { 
+    @Html.RouteLink(item.username, new { controller = "Events", action = "Index", user_id = item.id, page = 1 },
+    new {
+        @class = item.id == ViewBag.SelectedUser ? "selected" : null 
+    }
+    )
+    }
+

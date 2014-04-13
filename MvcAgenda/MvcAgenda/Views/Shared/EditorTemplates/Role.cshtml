@@ -1,0 +1,8 @@
+﻿@model MvcAgenda.Domain.Entities.Role
+<select id="Role" name="Role">
+@foreach (MvcAgenda.Domain.Entities.Role value in Enum.GetValues(typeof(MvcAgenda.Domain.Entities.Role)))
+    {
+<option value="@value" @(Model == value ? "selected=\"selected\"": "")>@value</option>
+}
+</select>
+

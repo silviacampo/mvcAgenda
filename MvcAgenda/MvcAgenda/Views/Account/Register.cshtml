@@ -1,0 +1,41 @@
+﻿@model MvcAgenda.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Create a new account.</h2>
+</hgroup>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.username)
+                @Html.TextBoxFor(m => m.username)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.password)
+                @Html.PasswordFor(m => m.password)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.confirmPassword)
+                @Html.PasswordFor(m => m.confirmPassword)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.email)
+                @Html.PasswordFor(m => m.email)
+            </li>
+        </ol>
+        <input type="submit" value="Register" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

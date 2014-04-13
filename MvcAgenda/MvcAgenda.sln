@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAgenda", "MvcAgenda\MvcAgenda.csproj", "{074FB463-B4F0-4C81-8D4E-1D1D1894C434}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAgenda.Tests", "MvcAgenda.Tests\MvcAgenda.Tests.csproj", "{8626E973-258F-4551-BAC1-A88AB041BC92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAgenda.Domain", "MvcAgenda.Domain\MvcAgenda.Domain.csproj", "{982BBC67-6014-4389-B673-4434B9F38E9F}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs27
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MvcAgenda.Domain\\MvcAgenda.Domain.csproj
+		SccProjectName1 = MvcAgenda.Domain
+		SccLocalPath1 = MvcAgenda.Domain
+		SccProjectUniqueName2 = MvcAgenda.Tests\\MvcAgenda.Tests.csproj
+		SccProjectName2 = MvcAgenda.Tests
+		SccLocalPath2 = MvcAgenda.Tests
+		SccProjectUniqueName3 = MvcAgenda\\MvcAgenda.csproj
+		SccProjectName3 = MvcAgenda
+		SccLocalPath3 = MvcAgenda
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{074FB463-B4F0-4C81-8D4E-1D1D1894C434}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{074FB463-B4F0-4C81-8D4E-1D1D1894C434}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{074FB463-B4F0-4C81-8D4E-1D1D1894C434}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{074FB463-B4F0-4C81-8D4E-1D1D1894C434}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8626E973-258F-4551-BAC1-A88AB041BC92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8626E973-258F-4551-BAC1-A88AB041BC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8626E973-258F-4551-BAC1-A88AB041BC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8626E973-258F-4551-BAC1-A88AB041BC92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{982BBC67-6014-4389-B673-4434B9F38E9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{982BBC67-6014-4389-B673-4434B9F38E9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{982BBC67-6014-4389-B673-4434B9F38E9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{982BBC67-6014-4389-B673-4434B9F38E9F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
