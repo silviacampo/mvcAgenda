@@ -26,7 +26,7 @@ namespace MvcAgenda.Controllers
         public ActionResult Index()
         {
             //return View(db.locations.ToList());
-            return View(repository.locations);
+            return View(repository.Locations);
         }
 
         //

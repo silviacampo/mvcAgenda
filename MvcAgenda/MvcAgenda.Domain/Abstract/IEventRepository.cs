@@ -9,5 +9,8 @@ namespace MvcAgenda.Domain.Abstract
     public interface IEventRepository
     {
         IQueryable<aevent> Events { get; }
+
+        void SaveEvent(aevent aevent);
+        void DeleteEvent(aevent aevent);
     }
 }

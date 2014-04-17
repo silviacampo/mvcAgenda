@@ -192,6 +192,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
@@ -297,6 +298,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Views\Users\Menu.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -344,8 +346,14 @@
     <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
     <None Include="ClassDiagram1.cd" />
     <Content Include="Views\Shared\UserSummary.cshtml" />
-    <Content Include="Views\Users\Menu.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Role.cshtml" />
+    <Content Include="Views\Users\UserMenu.cshtml" />
+    <Content Include="Views\Users\UserHiddenField.cshtml" />
+    <Content Include="Views\Comments\Index.cshtml" />
+    <Content Include="Views\Comments\Create.cshtml" />
+    <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Comments\Delete.cshtml" />
+    <Content Include="Views\Comments\Details.cshtml" />
     <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.Http.WebHost.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.Http.SelfHost.dll" />

@@ -1,7 +1,7 @@
 ﻿@model MvcAgenda.Domain.Entities.user
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Profile";
 }
 
 <h2>Edit</h2>
@@ -41,13 +41,15 @@
         <p>
             <input type="submit" value="Save" />
         </p>
-        @Html.EditorForModel()
+       @* @Html.EditorForModel()*@
     </fieldset>
 }
-
+        @if (User.Identity.Name == "silvia")
+        {
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

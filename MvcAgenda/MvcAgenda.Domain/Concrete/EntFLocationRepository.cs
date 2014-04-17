@@ -12,7 +12,7 @@ namespace MvcAgenda.Domain.Concrete
     {
         private EntFWDBContext context = new EntFWDBContext();
 
-        public IQueryable<MvcAgenda.Domain.Entities.location> locations
+        public IQueryable<MvcAgenda.Domain.Entities.location> Locations
         {
             get
             {
@@ -20,35 +20,24 @@ namespace MvcAgenda.Domain.Concrete
             }
         }
 
-        public void Dispose()
+        public void SaveLocation(location location)
         {
-            context.Dispose();
-        }
-
-        public void SaveChanges()
-        {
+            if (location.id == 0)
+            {
+                context.location.Add(location);
+            }
+            else
+            {
+                context.location.Find(location.id).CopyFrom(location);
+            }
             context.SaveChanges();
         }
 
-        //public void DeleteObject(object location)
-        //{
-        //    context.locations.DeleteObject((MvcAgenda.Domain.location)location);
-        //}
-
-        //public void AddObject(object location)
-        //{
-        //    context.locations.AddObject((MvcAgenda.Domain.location)location);
-        //}
-
-        //public void Attach(object location)
-        //{
-        //    context.locations.Attach((MvcAgenda.Domain.location)location);
-        //}
-
-        //public ObjectStateManager ObjectStateManager()
-       // {
-       //     return context.ObjectStateManager;
-       // }
+        public void DeleteLocation(location location)
+        {
+            context.location.Remove(location);
+            context.SaveChanges();
+        }
     }
 }
 

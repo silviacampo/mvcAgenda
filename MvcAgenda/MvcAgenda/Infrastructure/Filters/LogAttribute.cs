@@ -19,7 +19,7 @@ namespace MvcAgenda.Infrastructure.Filters
         public override void OnActionExecuted(ActionExecutedContext filterContext) 
         {
             timer.Stop();
-            filterContext.HttpContext.Response.Write(string.Format("Action takes {0} secs",timer.Elapsed.TotalSeconds));
+           // filterContext.HttpContext.Response.Write(string.Format("Action takes {0} secs",timer.Elapsed.TotalSeconds));
         }
 
         public override void OnResultExecuting(ResultExecutingContext filterContext)
@@ -30,7 +30,7 @@ namespace MvcAgenda.Infrastructure.Filters
         public override void OnResultExecuted(ResultExecutedContext filterContext)
         {
             timer.Stop();
-            filterContext.HttpContext.Response.Write(string.Format("Action result takes {0} secs", timer.Elapsed.TotalSeconds));
+           // filterContext.HttpContext.Response.Write(string.Format("Action result takes {0} secs", timer.Elapsed.TotalSeconds));
         }
     }
 }

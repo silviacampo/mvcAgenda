@@ -31,6 +31,8 @@
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) 
+   @if (User.Identity.Name == "silvia")
+        {  
+       @Html.ActionLink("Back to List", "Index")}
 </p>

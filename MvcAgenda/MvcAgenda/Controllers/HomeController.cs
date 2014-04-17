@@ -14,21 +14,21 @@ namespace MvcAgenda.Controllers
     //[ActionName("Home")] view should be home
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            ViewBag.Message = "Register or log in to manage your information, event and comments.";
 
             return View("Index");
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "";
             //this.ControllerContext.
 
             return View();

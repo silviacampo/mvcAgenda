@@ -1,0 +1,15 @@
+﻿@model MvcAgenda.Domain.Entities.user
+
+@{
+    Layout = null;
+    }
+    
+    <ul>
+        <li>@Html.ActionLink("Profile", "Edit", new { controller = "Users", id = Model.id })</li>
+        <li>@Html.ActionLink("Events", "Index", new { controller = "Events", user_id = Model.id, page = 1 })</li>
+        <li>@Html.ActionLink("Add Event", "Create", new { controller = "Events" })</li>
+        <li>@Html.ActionLink("Locations", "Index", "Locations")</li>
+        <li>@Html.ActionLink("Comments", "Index", "Comments")</li>
+    </ul>
+
+

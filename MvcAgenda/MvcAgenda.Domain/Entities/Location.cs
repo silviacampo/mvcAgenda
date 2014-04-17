@@ -17,6 +17,13 @@ namespace MvcAgenda.Domain.Entities
 
         public List<aevent> aevents { get; set; }
 
+        public void CopyFrom(location location)
+        {
+            city = location.city;
+            country = location.country;
+            timezone = location.timezone;
+         }
+
     }
 
 }

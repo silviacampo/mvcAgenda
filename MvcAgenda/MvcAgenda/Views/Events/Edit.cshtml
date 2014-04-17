@@ -1,4 +1,4 @@
-﻿@model MvcAgenda.aevent
+﻿@model MvcAgenda.Domain.Entities.aevent
 
 @{
     ViewBag.Title = "Edit";
@@ -30,13 +30,20 @@
             @Html.ValidationMessageFor(model => model.description)
         </div>
 
-        <div class="editor-label">
+   @if (User.Identity.Name == "silvia")
+   {
+             <div class="editor-label">
             @Html.LabelFor(model => model.user_id)
         </div>
-        <div class="editor-field">
+       <div class="editor-field">
             @Html.DropDownListFor(model => model.user_id, (List<SelectListItem>)ViewBag.users)
             @Html.ValidationMessageFor(model => model.user_id)
         </div>
+   }
+   else
+   {
+       Html.RenderAction("UserHiddenField", new { controller = "Users", username = User.Identity.Name });
+   }
 
         <div class="editor-label">
             @Html.LabelFor(model => model.location_id)
@@ -76,9 +83,13 @@
     </fieldset>
 }
 
+@if (User.Identity.Name == "silvia")
+{
+     
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

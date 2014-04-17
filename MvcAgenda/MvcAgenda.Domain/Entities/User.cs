@@ -30,7 +30,7 @@ namespace MvcAgenda.Domain.Entities
 
         public bool isAdmin { get; set; }
 
-        internal void CopyFrom(user user)
+        public void CopyFrom(user user)
         {
             username = user.username;
             password = user.password;

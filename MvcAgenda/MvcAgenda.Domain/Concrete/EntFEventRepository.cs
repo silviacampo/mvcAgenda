@@ -17,5 +17,23 @@ namespace MvcAgenda.Domain.Concrete
                 return context.aevent;
             }
         }
+        public void SaveEvent(aevent aevent)
+        {
+            if (aevent.id == 0)
+            {
+                context.aevent.Add(aevent);
+            }
+            else
+            {
+                context.aevent.Find(aevent.id).CopyFrom(aevent);
+            }
+            context.SaveChanges();
+        }
+
+        public void DeleteEvent(aevent aevent)
+        {
+            context.aevent.Remove(aevent);
+            context.SaveChanges();
+        }
     }
 }

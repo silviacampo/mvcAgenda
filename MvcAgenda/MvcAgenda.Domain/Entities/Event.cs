@@ -32,6 +32,16 @@ namespace MvcAgenda.Domain.Entities
         public location location { get; set; }
 
         public List<comment> comments { get; set; }
+        public void CopyFrom(aevent aevent)
+        {
+            title = aevent.title;
+            description = aevent.description;
+            user_id = aevent.user_id;
+            location_id = aevent.location_id;
+            startTime = aevent.startTime;
+            endTime = aevent.endTime;
+            url = aevent.url;
+        }
     }
     public class eventMetaData
     {
@@ -45,9 +55,11 @@ namespace MvcAgenda.Domain.Entities
         [StringLength(200, ErrorMessage = "Max 200 char")]
         public global::System.String description { get; set; }
 
+         [DisplayName("User")]
         [Range(1, int.MaxValue, ErrorMessage = "You must choose a user")]
         public global::System.Int32 user_id { get; set; }
 
+         [DisplayName("Location")]
         [Range(1, int.MaxValue, ErrorMessage = "You must choose a location")]
         public global::System.Int32 location_id { get; set; }
 

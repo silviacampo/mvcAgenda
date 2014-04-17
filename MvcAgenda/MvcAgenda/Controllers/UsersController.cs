@@ -118,8 +118,14 @@ namespace MvcAgenda.Controllers
                 repository.SaveUser(user);
                 //TempData used like viewbag (not usefull, we are redirecting and the data would pass between view and controller only in the current http request) and session(persist too long and should be erased) but deleted at the end of the http request
                 TempData["message"] = string.Format("{0} has been saved", user.username);
-
-                return RedirectToAction("Index");
+                if (User.Identity.Name == "silvia")
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             else
             {
@@ -201,6 +207,18 @@ namespace MvcAgenda.Controllers
         public PartialViewResult Menu(int? user_id = null) {
             ViewBag.SelectedUser = user_id;
             return PartialView(repository.Users.OrderBy(u=>u.username));
+        }
+
+        public PartialViewResult UserMenu(string username)
+        {
+            user user = repository.Users.Single(u=>u.username == username);
+            return PartialView(user);
+        }
+
+        public PartialViewResult UserHiddenField(string username)
+        {
+            user user = repository.Users.Single(u => u.username == username);
+            return PartialView(user);
         }
 
         public RedirectToRouteResult ResetPassword(int id, string returnUrl)

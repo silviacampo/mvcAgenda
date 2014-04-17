@@ -60,7 +60,7 @@ namespace MvcAgenda.Controllers
 
         //
         // GET: /Events/
-        public int pageSize = 2;
+        public int pageSize = 5;
         public ViewResult Index(int? user_id, int page = 1)
         {
             EventsListViewModel viewModel = new EventsListViewModel
@@ -95,8 +95,8 @@ namespace MvcAgenda.Controllers
 
         public ActionResult Create()
         {
-            List<SelectListItem> users = getUsers();
-            ViewBag.users = users;
+            //List<SelectListItem> users = getUsers();
+            //ViewBag.users = users;
             return View(new aevent { startTime = DateTime.Now, user_id=0 });
         }
 
@@ -106,18 +106,24 @@ namespace MvcAgenda.Controllers
         [HttpPost]
         public ActionResult Create(aevent aevent)
         {
-            if (ModelState.IsValidField("startTime") && ModelState.IsValidField("endTime") && aevent.startTime.CompareTo(aevent.endTime) >=0)
-            {
-            ModelState.AddModelError("","Event cannot finish before staring");
-            }
+            //if (ModelState.IsValidField("startTime") && ModelState.IsValidField("endTime") && aevent.startTime.CompareTo(aevent.endTime) >=0)
+           // {
+           // ModelState.AddModelError("","Event cannot finish before staring");
+           // }
             if (ModelState.IsValid)
             {
-               // db.aevents.AddObject(aevent);
-               // db.SaveChanges();
+                this.repository.SaveEvent(aevent);
 
                 SendEventByEmail(emailsender, aevent);
 
-                return RedirectToAction("Index");
+                if (User.Identity.Name == "silvia")
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index", new { controller = "Events", user_id = aevent.user_id, page = 1 });
+                }
             }
             List<SelectListItem> users = getUsers();
             ViewBag.users = users;
@@ -149,16 +155,21 @@ namespace MvcAgenda.Controllers
         {
             if (ModelState.IsValid)
             {
-                //db.aevents.Attach(aevent);
-               // db.ObjectStateManager.ChangeObjectState(aevent, EntityState.Modified);
-               // db.SaveChanges();
+                this.repository.SaveEvent(aevent);
 
                 SendEventByEmail(emailsender, aevent);
 
-                return RedirectToAction("Index");
+                if (User.Identity.Name == "silvia")
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index", new { controller = "Events", user_id = aevent.user_id, page = 1 });
+                }
             }
-            List<SelectListItem> users = getUsers();
-            ViewBag.users = users;
+            //List<SelectListItem> users = getUsers();
+            //ViewBag.users = users;
             return View(aevent);
         }
 
@@ -181,13 +192,17 @@ namespace MvcAgenda.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            //aevent aevent = db.aevents.Single(a => a.id == id);
-           // db.aevents.DeleteObject(aevent);
-            //db.SaveChanges();
+            aevent aevent = this.repository.Events.Single(a => a.id == id);
+            this.repository.DeleteEvent(aevent);
 
-           // SendEventByEmail(emailsender, aevent);
-
-            return RedirectToAction("Index");
+            if (User.Identity.Name == "silvia")
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index", new { controller = "Events", user_id = aevent.user_id, page = 1 });
+            }
         }
 
         protected override void Dispose(bool disposing)
