@@ -167,42 +167,42 @@ namespace MvcAgenda.Controllers
             base.Dispose(disposing);
         }
 
-       // public JsonResult IsUsernameAvailable(string username)
-      //  {
-            //if (!db.users.Any(u => u.username == username))
-            //{
-            //    return Json(true, JsonRequestBehavior.AllowGet);
-            //}
-            //else
-            //{
-            //    string suggestedUID = String.Format("{0} is not available.", username);
-            //    for (int i = 1; i < 100; i++)
-            //    {
-            //        string altCandidate = username + i.ToString();
-            //        if (!db.users.Any(u => u.username == altCandidate))
-            //        {
-            //            suggestedUID = String.Format("{0} is not available. Try {1}.", username, altCandidate);
-            //            break;
-            //        }
-            //    }
-            //    return Json(suggestedUID, JsonRequestBehavior.AllowGet);
-            //}
+        public JsonResult IsUsernameAvailable(string username, int id =0)
+        {
+            if (!repository.Users.Any(u => u.username == username) || id > 0)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                string suggestedUID = String.Format("{0} is not available.", username);
+                for (int i = 1; i < 100; i++)
+                {
+                    string altCandidate = username + i.ToString();
+                    if (!repository.Users.Any(u => u.username == altCandidate))
+                    {
+                        suggestedUID = String.Format("{0} is not available. Try {1}.", username, altCandidate);
+                        break;
+                    }
+                }
+                return Json(suggestedUID, JsonRequestBehavior.AllowGet);
+            }
 
-            
-     //   }
 
-       // public JsonResult IsEmailAvailable(string email)
-       // {
-            //if (!db.users.Any(u => u.email == email))
-            //{
-            //    return Json(true, JsonRequestBehavior.AllowGet);
-            //}
-            //else
-            //{
-            //    string msg = String.Format("{0} is not available.", email);
-            //    return Json(msg, JsonRequestBehavior.AllowGet);
-            //}
-      //  }
+        }
+
+        public JsonResult IsEmailAvailable(string email, int id =0)
+        {
+            if (!repository.Users.Any(u => u.email == email)|| id > 0)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                string msg = String.Format("{0} is not available.", email);
+                return Json(msg, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         public PartialViewResult Menu(int? user_id = null) {
             ViewBag.SelectedUser = user_id;

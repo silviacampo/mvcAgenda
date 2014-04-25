@@ -216,5 +216,24 @@ namespace MvcAgenda.Controllers
         {
             emailsender.SendMail(aevent);
         }
+
+        public JsonResult IsStartingDateAvailable(int userid, string startingDate)
+        {
+            DateTime parsedDate;
+            if (!DateTime.TryParse(startingDate, out parsedDate))
+            {
+                return Json("Please enter a valid date",JsonRequestBehavior.AllowGet);
+            }
+            else if (!repository.Events.Any(u => u.user_id == userid && u.startTime == parsedDate))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                string msg = String.Format("{0} is not available.", startingDate.ToString());
+                return Json(msg, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }

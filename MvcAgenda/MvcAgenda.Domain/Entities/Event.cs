@@ -66,12 +66,12 @@ namespace MvcAgenda.Domain.Entities
         [DisplayName("Starting")]
         [DataType(DataType.DateTime)]
         [Required(ErrorMessage = "Start Time can't be empty")]
-       // [FutureDate(ErrorMessage = "Start Time must be a date in the future")]
+        [FutureDate(ErrorMessage = "Start Time must be a date in the future")]
         public global::System.DateTime startTime { get; set; }
 
         [DisplayName("Ending")]
         [DataType(DataType.DateTime)]
-       // [FutureDate(ErrorMessage = "End Time must be a date in the future")]
+        [FutureDate(ErrorMessage = "End Time must be a date in the future")]
         public Nullable<global::System.DateTime> endTime { get; set; }
 
         [DisplayName("URL")]

@@ -58,8 +58,7 @@ namespace MvcAgenda.Controllers
         {
             if (ModelState.IsValid)
             {
-                //repository.AddObject(location);
-                //repository.SaveChanges();
+                this.repository.SaveLocation(location);
                 return RedirectToAction("Index");
             }
 
