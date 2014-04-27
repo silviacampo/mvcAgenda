@@ -124,5 +124,18 @@ namespace MvcAgenda.Controllers
            // repository.Dispose();
             base.Dispose(disposing);
         }
+
+        public JsonResult IsCityCountryAvailable(string city, string country)
+        {
+            if (!repository.Locations.Any(l => l.city == city && l.country == country))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                string msg = String.Format("{0} already exists.", city);
+                return Json(msg, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

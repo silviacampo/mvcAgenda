@@ -35,19 +35,19 @@ namespace MvcAgenda.Domain.Entities
 
        [DisplayName("City")]
        [Required(ErrorMessage = "City can't be empty")]
-       //[Remote("IsCityCountryAvailable", "Locations")]
+       [Remote("IsCityCountryAvailable", "Locations", AdditionalFields="country")]
        [StringLength(20, ErrorMessage = "Max 20 char")]
        public global::System.String city { get; set; }
 
        [DisplayName("Country")]
        [Required(ErrorMessage = "Country can't be empty")]
-       [Remote("IsCityCountryAvailable", "Locations")]
+       [Remote("IsCityCountryAvailable", "Locations", AdditionalFields="city")]
        [StringLength(20, ErrorMessage = "Max 20 char")]
        public global::System.String country { get; set; }
 
        [DisplayName("Timezone")]
        [Required(ErrorMessage = "TimeZone can't be empty")]
-       [Range(-12, 12, ErrorMessage = "Invalide Timezone")]
+       [Range(-12, 12, ErrorMessage = "TimeZone can't be more than 12 or less than -12")]
        public global::System.Int32 timezone { get; set; }
    }
 

@@ -5,11 +5,15 @@
         <title>@ViewBag.Title - My Agenda</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
+                @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/jqueryval")
+         @Styles.Render("~/Content/themes/base/css")
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
         <script type="text/javascript">
             $(document).ready(function () {
-                $('a, :submit').button().css('float', 'left').css('margin', '5px');
+                //$('a, :submit').button().css('float', 'left').css('margin', '5px');
 
             }
         )
@@ -56,7 +60,7 @@
             </div>
         </footer>
 
-        @Scripts.Render("~/bundles/jquery")
+
         @RenderSection("scripts", required: false)
     </body>
 </html>
