@@ -10,19 +10,6 @@ float: left;
 width: 300px;
 margin: 15px;
 }
-#swatch {
-width: 120px;
-height: 100px;
-margin-top: 18px;
-margin-left: 350px;
-background-image: none;
-}
-#red .ui-slider-range { background: #ef2929; }
-#red .ui-slider-handle { border-color: #ef2929; }
-#green .ui-slider-range { background: #8ae234; }
-#green .ui-slider-handle { border-color: #8ae234; }
-#blue .ui-slider-range { background: #729fcf; }
-#blue .ui-slider-handle { border-color: #729fcf; }
 </style>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -66,9 +53,9 @@ background-image: none;
             @Html.LabelFor(model => model.timezone)
         </div>
         <div class="editor-field"> 
-         @*@Html.EditorFor(model => model.timezone)*@       
-           Currently: <label id="timezone">0</label>
-            <label id="min">-12</label><div id="slider"></div><label id="max">12</label>          
+         @Html.EditorFor(model => model.timezone)       
+           @*Currently: <label id="timezone">0</label>
+            <label id="min">-12</label><div id="slider"></div><label id="max">12</label>*@          
             @Html.ValidationMessageFor(model => model.timezone)
         </div><div style="clear:both;"  /> 
 

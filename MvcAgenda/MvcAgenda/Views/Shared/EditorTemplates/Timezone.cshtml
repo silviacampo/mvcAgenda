@@ -1,1 +1,28 @@
-﻿
+﻿@model int?
+<style>
+     #min, #max {float:left;margin: 10px;}
+#slider {
+float: left;
+width: 300px;
+margin: 15px;
+}
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#slider').slider({
+            range: "max",
+            min: -12,
+            max: 12,
+            value: @(Model ?? 0),
+            slide: function (event, ui) {
+                $("#timezonelbl").text(ui.value);
+                $("#timezone").val(ui.value);
+            }
+        });
+    }
+)
+</script>
+
+Currently: <label id="timezonelbl">@(Model ?? 0)</label>
+<label id="min">-12</label><div id="slider"></div><label id="max">12</label>  
+<input type="hidden" id="timezone" name="TimeZone" value="@(Model ?? 0)" />

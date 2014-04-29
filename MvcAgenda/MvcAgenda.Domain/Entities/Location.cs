@@ -20,7 +20,7 @@ namespace MvcAgenda.Domain.Entities
         public global::System.Int32 timezone { get; set; }
 
         public List<aevent> aevents { get; set; }
-
+        public Timezone timezoneO { get { return new Timezone(timezone); } set { timezone = value.offtime; } }
         public void CopyFrom(location location)
         {
             city = location.city;
@@ -46,9 +46,21 @@ namespace MvcAgenda.Domain.Entities
        public global::System.String country { get; set; }
 
        [DisplayName("Timezone")]
+       [UIHint("Timezone")]
        [Required(ErrorMessage = "TimeZone can't be empty")]
        [Range(-12, 12, ErrorMessage = "TimeZone can't be more than 12 or less than -12")]
        public global::System.Int32 timezone { get; set; }
+
+        [UIHint("Timezone")]
+       public Timezone timezoneO { get { return new Timezone(timezone); } set { timezone = value.offtime; } }
    }
+
+   public class Timezone
+   {
+       public int offtime;
+
+       public Timezone(int offtime) { this.offtime = offtime; }
+     }
+
 
 }

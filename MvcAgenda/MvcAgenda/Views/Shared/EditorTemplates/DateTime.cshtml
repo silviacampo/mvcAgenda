@@ -1,10 +1,11 @@
 ﻿@model System.DateTime?
 <script type="text/javascript">
     $(document).ready(function () {
-              $(".datepicker").datepicker({
-             showButtonPanel: true
+              $(".datetimepicker").datetimepicker({
+             showButtonPanel: true,
+             mask:true,
         });
     }
 )
 </script>
-@Html.TextBoxFor(m => m, new { @class="datepicker" } )
+@Html.TextBoxFor(m => m, new { @class="datetimepicker" } )
