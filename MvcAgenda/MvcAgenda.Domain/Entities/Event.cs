@@ -60,6 +60,7 @@ namespace MvcAgenda.Domain.Entities
         public global::System.Int32 user_id { get; set; }
 
          [DisplayName("Location")]
+         [UIHint("LocationAutocomplete")]
         [Range(1, int.MaxValue, ErrorMessage = "You must choose a location")]
         public global::System.Int32 location_id { get; set; }
 

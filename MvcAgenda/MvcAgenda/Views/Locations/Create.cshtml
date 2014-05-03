@@ -3,28 +3,7 @@
 @{
     ViewBag.Title = "Create";
 }
- <style>
-     #min, #max {float:left;margin: 10px;}
-#slider {
-float: left;
-width: 300px;
-margin: 15px;
-}
-</style>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#slider').slider({
-            range: "max",
-            min: -12,
-            max: 12,
-            value: 0,
-            slide: function (event, ui) {
-                $("#timezone").text(ui.value);
-            }
-        });
-    }
-)
-</script>
+
 <h2>Create</h2>
 
 @using (Html.BeginForm()) {
@@ -53,10 +32,8 @@ margin: 15px;
             @Html.LabelFor(model => model.timezone)
         </div>
         <div class="editor-field"> 
-         @Html.EditorFor(model => model.timezone)       
-           @*Currently: <label id="timezone">0</label>
-            <label id="min">-12</label><div id="slider"></div><label id="max">12</label>*@          
-            @Html.ValidationMessageFor(model => model.timezone)
+             @Html.EditorFor(model => model.timezone)       
+             @Html.ValidationMessageFor(model => model.timezone)
         </div><div style="clear:both;"  /> 
 
 

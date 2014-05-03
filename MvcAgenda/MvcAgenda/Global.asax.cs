@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using MvcAgenda.Infrastructure;
+using System.Web.Http.Dispatcher;
 
 namespace MvcAgenda
 {
@@ -26,7 +27,7 @@ namespace MvcAgenda
             AuthConfig.RegisterAuth();
 
             ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
- 
+           
             //to disable client side validation for the application
             //HtmlHelper.ClientValidationEnabled = false;
             //HtmlHelper.UnobtrusiveJavaScriptEnabled = false;

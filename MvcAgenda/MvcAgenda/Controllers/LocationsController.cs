@@ -7,12 +7,12 @@ using System.Web;
 using System.Web.Mvc;
 using MvcAgenda.Domain.Abstract;
 using MvcAgenda.Domain;
+using MvcAgenda.Domain.Entities;
 
 namespace MvcAgenda.Controllers
 {
     public class LocationsController : Controller
     {
-       // private agendaEntities db = new agendaEntities();
         private ILocationRepository repository;
 
         public LocationsController(ILocationRepository repository)
@@ -25,7 +25,6 @@ namespace MvcAgenda.Controllers
 
         public ActionResult Index()
         {
-            //return View(db.locations.ToList());
             return View(repository.Locations);
         }
 
@@ -54,7 +53,7 @@ namespace MvcAgenda.Controllers
         // POST: /Locations/Create
 
         [HttpPost]
-        public ActionResult Create(Domain.Entities.location location)
+        public ActionResult Create(location location)
         {
             if (ModelState.IsValid)
             {
@@ -136,6 +135,12 @@ namespace MvcAgenda.Controllers
                 string msg = String.Format("{0} already exists.", city);
                 return Json(msg, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public JsonResult Get(string term="")
+        {
+            var selectedLocations = repository.Locations.Where(l => l.city.Contains(term)).Select(l => new { label = l.city, id = l.id}).Take(25).ToList();
+            return Json(selectedLocations, JsonRequestBehavior.AllowGet);
         }
     }
 }
