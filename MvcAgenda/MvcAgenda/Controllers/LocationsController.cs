@@ -31,15 +31,15 @@ namespace MvcAgenda.Controllers
         //
         // GET: /Locations/Details/5
 
-       // public ActionResult Details(int id = 0)
-       // {
-            //Domain.location location = repository.locations.Single(l => l.id == id);
-           // if (location == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(location);
-        //}
+        public ActionResult Details(int id = 0)
+        {
+            location location = repository.Locations.Single(l => l.id == id);
+            if (location == null)
+            {
+                return HttpNotFound();
+            }
+            return View(location);
+        }
 
         //
         // GET: /Locations/Create
@@ -67,15 +67,15 @@ namespace MvcAgenda.Controllers
         //
         // GET: /Locations/Edit/5
 
-       // public ActionResult Edit(int id = 0)
-       // {
-           // Domain.location location = repository.locations.Single(l => l.id == id);
-          //  if (location == null)
-          //  {
-         //      return HttpNotFound();
-         //   }
-         //   return View(location);
-       // }
+        public ActionResult Edit(int id = 0)
+        {
+            location location = repository.Locations.Single(l => l.id == id);
+            if (location == null)
+            {
+                return HttpNotFound();
+            }
+            return View(location);
+        }
 
         //
         // POST: /Locations/Edit/5
@@ -85,9 +85,7 @@ namespace MvcAgenda.Controllers
         {
             if (ModelState.IsValid)
             {
-                //repository.Attach(location);
-                //repository.ObjectStateManager().ChangeObjectState(location, EntityState.Modified);
-                //repository.SaveChanges();
+                this.repository.SaveLocation(location);
                 return RedirectToAction("Index");
             }
             return View(location);
@@ -96,27 +94,26 @@ namespace MvcAgenda.Controllers
         //
         // GET: /Locations/Delete/5
 
-        //public ActionResult Delete(int id = 0)
-        //{
-        //    Domain.location location = repository.locations.Single(l => l.id == id);
-        //    if (location == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(location);
-        //}
+        public ActionResult Delete(int id = 0)
+        {
+            location location = repository.Locations.Single(l => l.id == id);
+            if (location == null)
+            {
+                return HttpNotFound();
+            }
+            return View(location);
+        }
 
         //
         // POST: /Locations/Delete/5
 
-        //[HttpPost, ActionName("Delete")]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Domain.location location = repository.locations.Single(l => l.id == id);
-        //    repository.DeleteObject(location);
-        //    repository.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            location location = repository.Locations.Single(l => l.id == id);
+            repository.DeleteLocation(location);
+            return RedirectToAction("Index");
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -124,9 +121,9 @@ namespace MvcAgenda.Controllers
             base.Dispose(disposing);
         }
 
-        public JsonResult IsCityCountryAvailable(string city, string country)
+        public JsonResult IsCityCountryAvailable(string city, string country, int id=0)
         {
-            if (!repository.Locations.Any(l => l.city == city && l.country == country))
+            if (!repository.Locations.Any(l => l.city == city && l.country == country && l.id !=id))
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
             }

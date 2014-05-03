@@ -67,6 +67,7 @@
     <Compile Include="Abstract\IEventRepository.cs" />
     <Compile Include="Abstract\ILocationRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
+    <Compile Include="Attributes\EmailAddressAttribute.cs" />
     <Compile Include="Attributes\FutureDateAttribute.cs" />
     <Compile Include="Concrete\EntFCommentRepository.cs" />
     <Compile Include="Concrete\EntFEventRepository.cs" />

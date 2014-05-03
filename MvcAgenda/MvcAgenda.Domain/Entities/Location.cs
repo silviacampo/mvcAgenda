@@ -35,13 +35,13 @@ namespace MvcAgenda.Domain.Entities
 
        [DisplayName("City")]
        [Required(ErrorMessage = "City can't be empty")]
-       [Remote("IsCityCountryAvailable", "Locations", AdditionalFields="country")]
+       [Remote("IsCityCountryAvailable", "Locations", AdditionalFields="country, id")]
        [StringLength(20, ErrorMessage = "Max 20 char")]
        public global::System.String city { get; set; }
 
        [DisplayName("Country")]
        [Required(ErrorMessage = "Country can't be empty")]
-       [Remote("IsCityCountryAvailable", "Locations", AdditionalFields="city")]
+       [Remote("IsCityCountryAvailable", "Locations", AdditionalFields="city, id")]
        [StringLength(20, ErrorMessage = "Max 20 char")]
        public global::System.String country { get; set; }
 
