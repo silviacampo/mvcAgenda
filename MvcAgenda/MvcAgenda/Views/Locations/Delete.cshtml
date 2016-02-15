@@ -1,12 +1,26 @@
 ﻿@model MvcAgenda.Domain.Entities.location
-
 @{
-    ViewBag.Title = "Delete";
-}
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+    Layout = null;
+    }
+ <script>
+     $(function () {
+         $("#dialog-confirm").dialog({
+             resizable: false,
+             height: 280,
+             width: 350,
+             modal: true,
+             buttons: {
+                 Delete: function () {
+                     $(this).dialog("close");
+                 },
+                 Cancel: function () {
+                     $(this).dialog("close");
+                 }
+             }
+         });
+     });
+</script>
+<div id="dialog-confirm" title="Are you sure you want to delete this?">
 <fieldset>
     <legend>location</legend>
 
@@ -31,9 +45,11 @@
         @Html.DisplayFor(model => model.timezone)
     </div>
 </fieldset>
-@using (Html.BeginForm()) {
+
+@*@using (Html.BeginForm()) {
     <p>
         <input type="submit" value="Delete" /> |
         @Html.ActionLink("Back to List", "Index")
     </p>
-}
+}*@
+</div>

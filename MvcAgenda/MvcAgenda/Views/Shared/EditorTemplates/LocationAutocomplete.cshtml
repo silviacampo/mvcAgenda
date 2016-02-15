@@ -2,19 +2,12 @@
 <input id="autocomplete">
 @Html.HiddenFor(m => m, new { @class = "locationautocomplete" })
 <script>
-   // var tags = [{ label: "Montreal", value: "1" }, { label: "Toronto", value: "2"}];
     $("#autocomplete").autocomplete({
         autoFocus: true,
         minLength: 2,
-        source: "http://localhost:8087/Locations/get", //[{ label: "Montreal", id: "1" }, { label: "Toronto", id: "2"}],
+        source: "/Locations/get",
         select: function (event, ui) {
             $(".locationautocomplete").val(ui.item.id); 
         }
-//            function (request, response) {
-//            var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
-//            response($.grep(tags, function (item) {
-//                return matcher.test(item.label);
-//            }));
-//        }
     });
 </script>

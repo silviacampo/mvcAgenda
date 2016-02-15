@@ -25,6 +25,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("agendaModel", "comment_ibfk_2", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MvcAgenda.Infrastructure.user), "comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MvcAgenda.Infrastructure.comment), true)]
 [assembly: EdmRelationshipAttribute("agendaModel", "friend_ibfk_1", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MvcAgenda.Infrastructure.user), "friend", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MvcAgenda.Infrastructure.friend), true)]
 [assembly: EdmRelationshipAttribute("agendaModel", "friend_ibfk_2", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MvcAgenda.Infrastructure.user), "friend", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MvcAgenda.Infrastructure.friend), true)]
+[assembly: EdmRelationshipAttribute("agendaModel", "location_ibfk_1", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MvcAgenda.Infrastructure.user), "location", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MvcAgenda.Infrastructure.location), true)]
 
 #endregion
 
@@ -960,13 +961,15 @@ namespace MvcAgenda.Infrastructure
         /// <param name="city">Initial value of the city property.</param>
         /// <param name="country">Initial value of the country property.</param>
         /// <param name="timezone">Initial value of the timezone property.</param>
-        public static location Createlocation(global::System.Int32 id, global::System.String city, global::System.String country, global::System.Int32 timezone)
+        /// <param name="user_id">Initial value of the user_id property.</param>
+        public static location Createlocation(global::System.Int32 id, global::System.String city, global::System.String country, global::System.Int32 timezone, global::System.Int32 user_id)
         {
             location location = new location();
             location.id = id;
             location.city = city;
             location.country = country;
             location.timezone = timezone;
+            location.user_id = user_id;
             return location;
         }
 
@@ -1072,6 +1075,102 @@ namespace MvcAgenda.Infrastructure
         private global::System.Int32 _timezone;
         partial void OntimezoneChanging(global::System.Int32 value);
         partial void OntimezoneChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                OndescriptionChanging(value);
+                ReportPropertyChanging("description");
+                _description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("description");
+                OndescriptionChanged();
+            }
+        }
+        private global::System.String _description;
+        partial void OndescriptionChanging(global::System.String value);
+        partial void OndescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String address
+        {
+            get
+            {
+                return _address;
+            }
+            set
+            {
+                OnaddressChanging(value);
+                ReportPropertyChanging("address");
+                _address = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("address");
+                OnaddressChanged();
+            }
+        }
+        private global::System.String _address;
+        partial void OnaddressChanging(global::System.String value);
+        partial void OnaddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String postalcode
+        {
+            get
+            {
+                return _postalcode;
+            }
+            set
+            {
+                OnpostalcodeChanging(value);
+                ReportPropertyChanging("postalcode");
+                _postalcode = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("postalcode");
+                OnpostalcodeChanged();
+            }
+        }
+        private global::System.String _postalcode;
+        partial void OnpostalcodeChanging(global::System.String value);
+        partial void OnpostalcodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 user_id
+        {
+            get
+            {
+                return _user_id;
+            }
+            set
+            {
+                Onuser_idChanging(value);
+                ReportPropertyChanging("user_id");
+                _user_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("user_id");
+                Onuser_idChanged();
+            }
+        }
+        private global::System.Int32 _user_id;
+        partial void Onuser_idChanging(global::System.Int32 value);
+        partial void Onuser_idChanged();
 
         #endregion
 
@@ -1099,6 +1198,44 @@ namespace MvcAgenda.Infrastructure
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("agendaModel", "location_ibfk_1", "user")]
+        public user user
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("agendaModel.location_ibfk_1", "user").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("agendaModel.location_ibfk_1", "user").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<user> userReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("agendaModel.location_ibfk_1", "user");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("agendaModel.location_ibfk_1", "user", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -1121,13 +1258,15 @@ namespace MvcAgenda.Infrastructure
         /// <param name="username">Initial value of the username property.</param>
         /// <param name="password">Initial value of the password property.</param>
         /// <param name="email">Initial value of the email property.</param>
-        public static user Createuser(global::System.Int32 id, global::System.String username, global::System.String password, global::System.String email)
+        /// <param name="isAdmin">Initial value of the isAdmin property.</param>
+        public static user Createuser(global::System.Int32 id, global::System.String username, global::System.String password, global::System.String email, global::System.Boolean isAdmin)
         {
             user user = new user();
             user.id = id;
             user.username = username;
             user.password = password;
             user.email = email;
+            user.isAdmin = isAdmin;
             return user;
         }
 
@@ -1233,6 +1372,30 @@ namespace MvcAgenda.Infrastructure
         private global::System.String _email;
         partial void OnemailChanging(global::System.String value);
         partial void OnemailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean isAdmin
+        {
+            get
+            {
+                return _isAdmin;
+            }
+            set
+            {
+                OnisAdminChanging(value);
+                ReportPropertyChanging("isAdmin");
+                _isAdmin = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("isAdmin");
+                OnisAdminChanged();
+            }
+        }
+        private global::System.Boolean _isAdmin;
+        partial void OnisAdminChanging(global::System.Boolean value);
+        partial void OnisAdminChanged();
 
         #endregion
 
@@ -1323,6 +1486,28 @@ namespace MvcAgenda.Infrastructure
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<friend>("agendaModel.friend_ibfk_2", "friend", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("agendaModel", "location_ibfk_1", "location")]
+        public EntityCollection<location> locations
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<location>("agendaModel.location_ibfk_1", "location");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<location>("agendaModel.location_ibfk_1", "location", value);
                 }
             }
         }

@@ -35,6 +35,10 @@
             <End Role="user" EntitySet="user" />
             <End Role="friend" EntitySet="friend" />
           </AssociationSet>
+          <AssociationSet Name="location_ibfk_1" Association="agendaModel.Store.location_ibfk_1">
+            <End Role="user" EntitySet="user" />
+            <End Role="location" EntitySet="location" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="aevent">
           <Key>
@@ -47,7 +51,7 @@
           <Property Name="location_id" Type="int" Nullable="false" />
           <Property Name="startTime" Type="datetime" Nullable="false" />
           <Property Name="endTime" Type="datetime" />
-          <Property Name="url" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="url" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="comment">
           <Key>
@@ -71,9 +75,13 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+          <Property Name="address" Type="varchar" MaxLength="150" />
+          <Property Name="postalcode" Type="varchar" MaxLength="10" />
           <Property Name="city" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="country" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="timezone" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -83,6 +91,7 @@
           <Property Name="username" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="password" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="email" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="isAdmin" Type="bool" Nullable="false" />
         </EntityType>
         <Association Name="aevent_ibfk_1">
           <End Role="user" Type="agendaModel.Store.user" Multiplicity="1" />
@@ -156,6 +165,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="location_ibfk_1">
+          <End Role="user" Type="agendaModel.Store.user" Multiplicity="1" />
+          <End Role="location" Type="agendaModel.Store.location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="location">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -189,6 +210,10 @@
           <AssociationSet Name="friend_ibfk_2" Association="agendaModel.friend_ibfk_2">
             <End Role="user" EntitySet="users" />
             <End Role="friend" EntitySet="friends" />
+          </AssociationSet>
+          <AssociationSet Name="location_ibfk_1" Association="agendaModel.location_ibfk_1">
+            <End Role="user" EntitySet="users" />
+            <End Role="location" EntitySet="locations" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="aevent">
@@ -237,6 +262,11 @@
           <Property Type="String" Name="country" Nullable="false" />
           <Property Type="Int32" Name="timezone" Nullable="false" />
           <NavigationProperty Name="aevents" Relationship="agendaModel.aevent_ibfk_2" FromRole="location" ToRole="aevent" />
+          <Property Type="String" Name="description" />
+          <Property Type="String" Name="address" />
+          <Property Type="String" Name="postalcode" />
+          <Property Type="Int32" Name="user_id" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="agendaModel.location_ibfk_1" FromRole="location" ToRole="user" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -250,6 +280,8 @@
           <NavigationProperty Name="comments" Relationship="agendaModel.comment_ibfk_2" FromRole="user" ToRole="comment" />
           <NavigationProperty Name="friends" Relationship="agendaModel.friend_ibfk_1" FromRole="user" ToRole="friend" />
           <NavigationProperty Name="friends1" Relationship="agendaModel.friend_ibfk_2" FromRole="user" ToRole="friend" />
+          <Property Type="Boolean" Name="isAdmin" Nullable="false" />
+          <NavigationProperty Name="locations" Relationship="agendaModel.location_ibfk_1" FromRole="user" ToRole="location" />
         </EntityType>
         <Association Name="aevent_ibfk_1">
           <End Type="agendaModel.user" Role="user" Multiplicity="1" />
@@ -323,6 +355,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="location_ibfk_1">
+          <End Type="agendaModel.user" Role="user" Multiplicity="1" />
+          <End Type="agendaModel.location" Role="location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="location">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -365,6 +409,10 @@
           <EntitySetMapping Name="locations">
             <EntityTypeMapping TypeName="agendaModel.location">
               <MappingFragment StoreEntitySet="location">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="timezone" ColumnName="timezone" />
                 <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="city" ColumnName="city" />
@@ -375,6 +423,7 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="agendaModel.user">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="username" ColumnName="username" />
@@ -409,13 +458,13 @@
         <EntityTypeShape EntityType="agendaModel.location" Width="1.5" PointX="4.75" PointY="0.75" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="agendaModel.user" Width="1.5" PointX="8.25" PointY="4.5" Height="2.5571907552083326" />
         <AssociationConnector Association="agendaModel.aevent_ibfk_1" >
-          <ConnectorPoint PointX="8.25" PointY="6.4249886067708317" />
-          <ConnectorPoint PointX="1.5" PointY="6.4249886067708317" />
+          <ConnectorPoint PointX="8.25" PointY="6.6172900390624987" />
+          <ConnectorPoint PointX="1.5" PointY="6.6172900390624987" />
           <ConnectorPoint PointX="1.5" PointY="3.8840950520833331" />
         </AssociationConnector>
         <AssociationConnector Association="agendaModel.aevent_ibfk_2" >
-          <ConnectorPoint PointX="4.75" PointY="1.7401432291666672" />
-          <ConnectorPoint PointX="2.25" PointY="1.7401432291666672" />
+          <ConnectorPoint PointX="4.75" PointY="2.124873046875" />
+          <ConnectorPoint PointX="2.25" PointY="2.124873046875" />
         </AssociationConnector>
         <AssociationConnector Association="agendaModel.comment_ibfk_1" >
           <ConnectorPoint PointX="2.25" PointY="3.2401432291666667" />
@@ -428,12 +477,17 @@
           <ConnectorPoint PointX="7.75" PointY="3.922587890625" />
         </AssociationConnector>
         <AssociationConnector Association="agendaModel.friend_ibfk_1" >
-          <ConnectorPoint PointX="8.25" PointY="5.1151432291666659" />
-          <ConnectorPoint PointX="4.25" PointY="5.1151432291666659" />
+          <ConnectorPoint PointX="8.25" PointY="5.3464379882812487" />
+          <ConnectorPoint PointX="4.25" PointY="5.3464379882812487" />
         </AssociationConnector>
         <AssociationConnector Association="agendaModel.friend_ibfk_2" >
-          <ConnectorPoint PointX="8.25" PointY="4.7450716145833329" />
-          <ConnectorPoint PointX="4.25" PointY="4.7450716145833329" />
+          <ConnectorPoint PointX="8.25" PointY="4.8607189941406244" />
+          <ConnectorPoint PointX="4.25" PointY="4.8607189941406244" />
+        </AssociationConnector>
+        <AssociationConnector Association="agendaModel.location_ibfk_1" >
+          <ConnectorPoint PointX="9.4062525" PointY="4.5" />
+          <ConnectorPoint PointX="9.4062525" PointY="1.21875" />
+          <ConnectorPoint PointX="6.25" PointY="1.21875" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

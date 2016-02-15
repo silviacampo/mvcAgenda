@@ -43,6 +43,25 @@
         <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
     </li>
 </ol>*@
+<section id="calendarSection">
+@if (Request.IsAuthenticated)
+{
+
+    Html.RenderAction("Calendar", new { controller = "Events", id = User.Identity.Name });
+
+     if (User.Identity.Name == "silvia")
+     {
+       <ul>
+       <li>@Html.ActionLink("Users", "Index", "Users")</li>
+        <li>@Html.ActionLink("Admin Users", "Index", new { controller = "Users", area = "Admin" })</li>
+        <li>@Html.ActionLink("Events", "Index", "Events")</li>
+        <li>@Html.ActionLink("Locations", "Index", "Locations")</li>
+        <li>@Html.ActionLink("Comments", "Index", "Comments")</li>
+    </ul>
+        }
+}
+</section>
+<section id="menuSection">
 @if (Request.IsAuthenticated)
 {
     <h3>Use the following links:</h3>
@@ -60,3 +79,5 @@
     </ul>
         }
 }
+</section>
+

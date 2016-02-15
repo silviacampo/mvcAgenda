@@ -21,6 +21,7 @@ namespace MvcAgenda.Domain.Entities
 
         public List<friend> friends { get; set; }
         public List<aevent> aevents { get; set; }
+        public List<location> locations { get; set; }
         public List<comment> comments { get; set; }
         public List<friend> friends1 { get; set; }
 
@@ -42,7 +43,8 @@ namespace MvcAgenda.Domain.Entities
         public global::System.Int32 id { get; set; }
 
         [DisplayName("Name")]
-        [Required(ErrorMessage = "Name can't be empty")]
+        [Required(ErrorMessage =  "Name can't be empty")]
+        //[Required(ErrorMessageResourceType = typeof(User), ErrorMessageResourceName = "required"))]
         [Remote("IsUsernameAvailable", "Users", AdditionalFields="id")]
         [StringLength(20, ErrorMessage = "Max 20 char")]
         public global::System.String username { get; set; }

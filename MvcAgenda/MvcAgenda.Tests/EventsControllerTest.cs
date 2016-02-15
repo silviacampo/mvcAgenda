@@ -121,13 +121,13 @@ namespace MvcAgenda.Tests
 
             EventsController controller = new EventsController(mock.Object);
             controller.pageSize = 3;
-            EventsListViewModel result = (EventsListViewModel)controller.Index(null, 2).Model;
+            ListViewModel<aevent> result = (ListViewModel<aevent>)controller.Index(2).Model;
 
             //Assert
-            aevent[] eventArray = result.Events.ToArray();
+            aevent[] eventArray = result.Items.ToArray();
             Assert.IsTrue(eventArray.Length == 2);
-            Assert.AreEqual(eventArray[0].id, 5);
-            Assert.AreEqual(eventArray[1].id, 4);
+            Assert.AreEqual(eventArray[0].id, 4);
+            Assert.AreEqual(eventArray[1].id, 5);
             //mock.Verify(m => m.ListUsers(1, 1), Times.AtLeastOnce);
             //Assert.IsTrue(true); 
 
@@ -143,10 +143,10 @@ namespace MvcAgenda.Tests
 
             EventsController controller = new EventsController(mock.Object);
             controller.pageSize = 3;
-            EventsListViewModel result = (EventsListViewModel)controller.Index(2, 1).Model;
+            ListViewModel<aevent> result = (ListViewModel<aevent>)controller.Index(1).Model;
 
             //Assert
-            aevent[] eventArray = result.Events.ToArray();
+            aevent[] eventArray = result.Items.ToArray();
             Assert.IsTrue(eventArray.Length == 2);
             Assert.AreEqual(eventArray[0].id, 2);
             Assert.AreEqual(eventArray[1].id, 4);

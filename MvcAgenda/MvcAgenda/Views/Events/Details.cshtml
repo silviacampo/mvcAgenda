@@ -23,18 +23,18 @@
         @Html.DisplayFor(model => model.description)
     </div>
 
-    <div class="display-label">
+    @*<div class="display-label">
          @Html.DisplayNameFor(model => model.user_id)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.user_id)
-    </div>
+    </div>*@
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.location_id)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.location_id)
+        @Html.DisplayFor(model => model.location.label)
     </div>
 
     <div class="display-label">
@@ -60,6 +60,7 @@
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) 
+    @Html.ActionLink("Delete", "Delete", new { id = Model.id })
      @if (User.Identity.Name == "silvia")
      {  
        @Html.ActionLink("Back to List", "Index")}

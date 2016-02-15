@@ -67,15 +67,16 @@ namespace MvcAgenda.Domain.Entities
         [DisplayName("Starting")]
         [DataType(DataType.DateTime)]
         [Required(ErrorMessage = "Start Time can't be empty")]
-        [FutureDate(ErrorMessage = "Start Time must be a date in the future")]
+        [FutureDate("id", 0, ErrorMessage = "Start Time must be a date in the future")]
         public global::System.DateTime startTime { get; set; }
 
         [DisplayName("Ending")]
         [DataType(DataType.DateTime)]
-        [FutureDate(ErrorMessage = "End Time must be a date in the future")]
+        [FutureDate("id", 0, ErrorMessage = "End Time must be a date in the future")]
         public Nullable<global::System.DateTime> endTime { get; set; }
 
         [DisplayName("URL")]
+        [UIHint("Url")]
         [Required(AllowEmptyStrings = true, ErrorMessage = "URL can't be empty")]
         [StringLength(200, ErrorMessage = "Max 200 char")]
         [RegularExpression(@"(https?://)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*/?", ErrorMessage = "URL is not valid")]

@@ -15,10 +15,10 @@ namespace MvcAgenda
 
 
             routes.MapRoute(
-    name: "ControllerUserPageRoute",
-    url: "{controller}/User{user_id}/Page{page}",
+    name: "ControllerPageRoute",
+    url: "{controller}/Page{page}",
     defaults: new { controller = "{controller}", action = "Index" },
-    constraints: new { user_id = @"\d+", page = @"\d+" },
+    constraints: new { page = @"\d+" },
     namespaces: new[] { "MvcAgenda.Controllers" }
 );
             //this route could be replace by the previous one with a default page = 1
@@ -32,12 +32,11 @@ namespace MvcAgenda
 
 
             routes.MapRoute(
-    name: "ControllerPageRoute",
-    url: "{controller}/Page{page}",
-    defaults: new { controller = "{controller}", action = "Index" },
-    constraints: new { page = @"\d+" },
-    namespaces: new[] { "MvcAgenda.Controllers" }
-);
+                name: "EventCreate",
+                url: "Events/Create/{strStartTime}",
+                defaults: new { controller = "Events", action = "Create", strStartTime = UrlParameter.Optional },
+                namespaces: new[] { "MvcAgenda.Controllers" }
+            );
 
             routes.MapRoute(
                 name: "Default",

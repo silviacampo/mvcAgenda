@@ -1,16 +1,43 @@
 ﻿@model MvcAgenda.Domain.Entities.location
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add location";
 }
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>location</legend>
+         @{
+    Html.RenderAction("UserHiddenField", new { controller = "Users", username = User.Identity.Name });            
+}
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+                <div class="editor-label">
+            @Html.LabelFor(model => model.address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.address)
+            @Html.ValidationMessageFor(model => model.address)
+        </div>
+
+                <div class="editor-label">
+            @Html.LabelFor(model => model.postalcode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.postalcode)
+            @Html.ValidationMessageFor(model => model.postalcode)
+        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.city)

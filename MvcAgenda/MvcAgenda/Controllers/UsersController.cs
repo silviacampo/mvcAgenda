@@ -96,9 +96,9 @@ namespace MvcAgenda.Controllers
         //
         // GET: /Users/Edit/5
 
-        public ActionResult Edit(int id = 0)
+        public ActionResult Edit(string id = "")
         {
-            user user = this.repository.Users.FirstOrDefault(u =>u.id ==id);
+            user user = repository.Users.Single(u => u.username == id);
             //probably never come in
             if (user == null)
             {
@@ -167,6 +167,7 @@ namespace MvcAgenda.Controllers
             base.Dispose(disposing);
         }
 
+        [AllowAnonymous]
         public JsonResult IsUsernameAvailable(string username, int id =0)
         {
             if (!repository.Users.Any(u => u.username == username) || id > 0)
@@ -191,6 +192,7 @@ namespace MvcAgenda.Controllers
 
         }
 
+        [AllowAnonymous]
         public JsonResult IsEmailAvailable(string email, int id =0)
         {
             if (!repository.Users.Any(u => u.email == email)|| id > 0)

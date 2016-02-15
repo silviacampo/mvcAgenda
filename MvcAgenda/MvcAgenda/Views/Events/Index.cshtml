@@ -1,82 +1,78 @@
 ﻿@*@inherits MvcAgenda.Views.Models.ViewClasses.FormatEventStatusView*@
-@model MvcAgenda.Models.EventsListViewModel
-
+@model MvcAgenda.Models.ListViewModel<MvcAgenda.Domain.Entities.aevent>
 @{
     ViewBag.Title = "Events";
+    UrlHelper url = new UrlHelper(HttpContext.Current.Request.RequestContext);
+    String createUrl = url.RouteUrl(new { Controller = "Events", Action = "Create" });
 }
-
-<h2>Index</h2>
-@if (User.Identity.Name == "silvia")
-     {
-        <div id="categories" class="clear-both">
-        @{ Html.RenderAction("Menu", "Users");}
-        </div>
-        }
-<p>
+<h2>
+    Index</h2>
+    <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table>
-@if (Model.Events.Count() > 0)
-{
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Events.First().title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Events.First().description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Events.First().user_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Events.First().location_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Events.First().startTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Events.First().endTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Events.First().url)
-        </th>
-        <th></th>
-    </tr>
-}
-@foreach (var item in Model.Events)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.title)
-            @*@Formatter.Format(0)*@
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.user.username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.location_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.startTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.endTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.url)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
-
+    @if (Model.Items.Count() > 0)
+    {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.First().title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.First().description)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Events.First().user_id)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Items.First().location_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.First().startTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.First().endTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.First().url)
+            </th>
+            <th>
+            </th>
+        </tr>
+    }
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+                @*@Formatter.Format(0)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.user.username)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.location.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.startTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.url)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
 </table>
-<div class="pager"> 
-@Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new {user_id = Model.CurrentUser_id, page = x }))
+<div class="pager">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
 </div>
+

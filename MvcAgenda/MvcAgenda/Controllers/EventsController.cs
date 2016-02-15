@@ -61,20 +61,26 @@ namespace MvcAgenda.Controllers
         //
         // GET: /Events/
         public int pageSize = 5;
-        public ViewResult Index(int? user_id, int page = 1)
+        public ViewResult Index(int page = 1)
         {
-            EventsListViewModel viewModel = new EventsListViewModel
+            ListViewModel<aevent> viewModel = new ListViewModel<aevent>
             {
-                Events = repository.Events.Where(e => user_id == null || e.user_id == user_id ).OrderBy(e => e.title).Skip((page - 1) * pageSize).Take(pageSize),
+                Items= repository.Events.Where(e => User.Identity.Name == "" || e.user.username == User.Identity.Name).OrderBy(e => e.startTime).Skip((page - 1) * pageSize).Take(pageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = user_id == null ? repository.Events.Count() : repository.Events.Where(e=> e.user_id == user_id).Count()
+                    TotalItems = User.Identity.Name == "" ? repository.Events.Count() : repository.Events.Where(e => e.user.username == User.Identity.Name).Count()
                 },
-                CurrentUser_id = user_id
+                Current = User.Identity.Name
             };
             return View(viewModel);
+        }
+
+        public ViewResult Calendar(string id = "")
+        {
+            List<aevent> events = repository.Events.Where(e => id == "" || e.user.username == id).OrderBy(e => e.startTime).ToList();
+            return View(events);
         }
 
         //
@@ -93,11 +99,14 @@ namespace MvcAgenda.Controllers
         //
         // GET: /Events/Create
 
-        public ActionResult Create()
+        public ActionResult Create(string strStartTime)
         {
             //List<SelectListItem> users = getUsers();
             //ViewBag.users = users;
-            return View(new aevent { startTime = DateTime.Now, user_id=0 });
+            DateTime startTimeObj = DateTime.Now;
+            if (strStartTime != null && strStartTime.Length > 0)
+                startTimeObj = DateTime.Parse(strStartTime);
+            return View(new aevent { startTime = startTimeObj, user_id = 0 });
         }
 
         //
@@ -122,7 +131,7 @@ namespace MvcAgenda.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", new { controller = "Events", user_id = aevent.user_id, page = 1 });
+                    return RedirectToAction("Index", new { controller = "Home"});
                 }
             }
             List<SelectListItem> users = getUsers();
@@ -153,6 +162,7 @@ namespace MvcAgenda.Controllers
         [HttpPost]
         public ActionResult Edit(aevent aevent)
         {
+
             if (ModelState.IsValid)
             {
                 this.repository.SaveEvent(aevent);
@@ -165,7 +175,7 @@ namespace MvcAgenda.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", new { controller = "Events", user_id = aevent.user_id, page = 1 });
+                    return RedirectToAction("Index", new { controller = "Home" });
                 }
             }
             //List<SelectListItem> users = getUsers();
@@ -201,7 +211,7 @@ namespace MvcAgenda.Controllers
             }
             else
             {
-                return RedirectToAction("Index", new { controller = "Events", user_id = aevent.user_id, page = 1 });
+                return RedirectToAction("Index", new { controller = "Home" });
             }
         }
 

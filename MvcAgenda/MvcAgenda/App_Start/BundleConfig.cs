@@ -13,7 +13,9 @@ namespace MvcAgenda
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js",
-                         "~/Scripts/jquery.datetimepicker.js"));
+                         "~/Scripts/jquery.datetimepicker.js",
+                          "~/Scripts/moment.js",
+                          "~/Scripts/fullcalendar.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
@@ -39,7 +41,12 @@ namespace MvcAgenda
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.datetimepicker.css",
-                        "~/Content/themes/base/jquery.ui.theme.css"));
+                        "~/Content/themes/base/jquery.ui.theme.css",
+                        "~/Content/themes/base/fullcalendar.css"//,
+                        //"~/Content/themes/base/fullcalendar.print.css"
+                        ));
+
+            
         }
     }
 }

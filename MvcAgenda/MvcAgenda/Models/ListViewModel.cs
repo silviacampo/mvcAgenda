@@ -6,11 +6,11 @@ using MvcAgenda.Domain.Entities;
 
 namespace MvcAgenda.Models
 {
-    public class EventsListViewModel
+    public class ListViewModel<T>
     {
-        public IEnumerable<aevent> Events { get; set; }
+        public IEnumerable<T> Items { get; set; }
         public PagingInfo PagingInfo { get; set; }
 
-        public int? CurrentUser_id { get; set; }
+        public string Current { get; set; }
     }
 }

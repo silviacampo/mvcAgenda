@@ -71,7 +71,7 @@ namespace MvcAgenda.Models
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterModel: MvcAgenda.Domain.Entities.user
+    public class RegisterModel : MvcAgenda.Domain.Entities.user
     {
         //[Required]
         //[Display(Name = "User name")]

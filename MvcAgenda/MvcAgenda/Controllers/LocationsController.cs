@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using MvcAgenda.Domain.Abstract;
 using MvcAgenda.Domain;
 using MvcAgenda.Domain.Entities;
+using MvcAgenda.Models;
 
 namespace MvcAgenda.Controllers
 {
@@ -22,10 +23,21 @@ namespace MvcAgenda.Controllers
 
         //
         // GET: /Locations/
-
-        public ActionResult Index()
+        public int pageSize = 5;
+        public ActionResult Index(int page = 1)
         {
-            return View(repository.Locations);
+            ListViewModel<location> viewModel = new ListViewModel<location>
+            {
+                Items = repository.Locations.Where(l => User.Identity.Name == "" || l.user.username == User.Identity.Name).OrderBy(l => l.description).Skip((page - 1) * pageSize).Take(pageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = pageSize,
+                    TotalItems = User.Identity.Name == "" ? repository.Locations.Count() : repository.Locations.Where(e => e.user.username == User.Identity.Name).Count()
+                },
+                Current = User.Identity.Name
+            };
+            return View(viewModel);
         }
 
         //
@@ -94,14 +106,14 @@ namespace MvcAgenda.Controllers
         //
         // GET: /Locations/Delete/5
 
-        public ActionResult Delete(int id = 0)
+        public PartialViewResult Delete(int id = 0)
         {
             location location = repository.Locations.Single(l => l.id == id);
             if (location == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
             }
-            return View(location);
+            return PartialView(location);
         }
 
         //
@@ -121,9 +133,9 @@ namespace MvcAgenda.Controllers
             base.Dispose(disposing);
         }
 
-        public JsonResult IsCityCountryAvailable(string city, string country, int id=0)
+        public JsonResult IsCityCountryAvailable(string address, string city, string country, int user_id, int id=0)
         {
-            if (!repository.Locations.Any(l => l.city == city && l.country == country && l.id !=id))
+            if (!repository.Locations.Any(l=>l.address == address && l.city == city && l.country == country && l.user_id == user_id && l.id !=id))
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
@@ -136,8 +148,9 @@ namespace MvcAgenda.Controllers
 
         public JsonResult Get(string term="")
         {
-            var selectedLocations = repository.Locations.Where(l => l.city.Contains(term)).Select(l => new { label = l.city, id = l.id}).Take(25).ToList();
-            return Json(selectedLocations, JsonRequestBehavior.AllowGet);
+            var selectedLocations = repository.Locations.Where(l => l.description.Contains(term) || l.city.Contains(term) || l.address.Contains(term)).ToList();
+            var selectedValues = selectedLocations.Select(l => new { label = l.label, id = l.id });
+            return Json(selectedValues, JsonRequestBehavior.AllowGet);
         }
     }
 }

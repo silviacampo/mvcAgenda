@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MvcAgenda.Domain.Abstract;
 using MvcAgenda.Domain.Entities;
+using System.Data.Entity;
 
 namespace MvcAgenda.Domain.Concrete
 {
@@ -14,7 +15,7 @@ namespace MvcAgenda.Domain.Concrete
         public IQueryable<MvcAgenda.Domain.Entities.aevent> Events
         {
             get {
-                return context.aevent;
+                return context.aevent.Include(b => b.location).Include(b => b.user);
             }
         }
         public void SaveEvent(aevent aevent)

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MvcAgenda.Domain.Entities.aevent>
+
+@{
+    Layout = null;
+    UrlHelper url = new UrlHelper(HttpContext.Current.Request.RequestContext);
+    String createUrl = url.RouteUrl(new { Controller = "Events", Action = "Create" });
+}
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            events: [
+            @foreach (var item in Model)
+            {
+    <text>{</text>
+            <text>title:'</text> @item.title<text>',</text>
+            <text>description:'</text> @item.description<text>',</text>
+            <text>start:'</text> @item.startTime<text>',</text>
+	        <text>end:'</text> @item.endTime<text>',</text>
+            <text>url:'</text> @item.url<text>',</text>
+            <text>eventUrl:'</text> @url.RouteUrl(new { Controller = "Events", Action = "Details", item.id }) <text>',</text>
+     <text>},</text>  
+            }
+			],
+            eventClick: function(calEvent, jsEvent, view) {
+        if (calEvent.eventUrl) {
+            window.open(calEvent.eventUrl,'_blank');
+            return false;
+        }
+    },
+    dayClick: function(date, jsEvent, view) {
+       var url = '@createUrl' + '/' + date.format();
+            window.open( url ,'_blank');
+            return false;
+    }
+
+        });
+
+    });
+
+</script>
+<style>
+    body
+    {
+        margin: 40px 10px;
+        padding: 0;
+        font-family: "Lucida Grande" ,Helvetica,Arial,Verdana,sans-serif;
+        font-size: 14px;
+    }
+    
+
+</style>
+<div id='calendar'>
+</div>

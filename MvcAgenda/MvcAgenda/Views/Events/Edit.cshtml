@@ -1,7 +1,7 @@
 ﻿@model MvcAgenda.Domain.Entities.aevent
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit event";
 }
 
 <h2>Edit</h2>
@@ -49,6 +49,9 @@
             @Html.LabelFor(model => model.location_id)
         </div>
         <div class="editor-field">
+            @Html.HiddenFor(model => model.location.city)
+            @Html.HiddenFor(model => model.location.country)
+            @Html.DisplayFor(model => model.location.city) OR
             @Html.EditorFor(model => model.location_id)
             @Html.ValidationMessageFor(model => model.location_id)
         </div>
@@ -57,16 +60,33 @@
             @Html.LabelFor(model => model.startTime)
         </div>
         <div class="editor-field">
+         @if (Model.startTime > DateTime.Now)
+         { 
             @Html.EditorFor(model => model.startTime)
             @Html.ValidationMessageFor(model => model.startTime)
+         }
+         else
+         { 
+         @Html.DisplayFor(model => model.startTime)
+         @Html.HiddenFor(model => model.startTime)
+         }
+
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.endTime)
         </div>
         <div class="editor-field">
+         @if (Model.startTime > DateTime.Now)
+         { 
             @Html.EditorFor(model => model.endTime)
             @Html.ValidationMessageFor(model => model.endTime)
+         }
+         else
+         { 
+         @Html.DisplayFor(model => model.endTime)
+         @Html.HiddenFor(model => model.endTime)
+         }
         </div>
 
         <div class="editor-label">

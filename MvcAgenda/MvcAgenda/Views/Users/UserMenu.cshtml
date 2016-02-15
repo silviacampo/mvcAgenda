@@ -4,12 +4,11 @@
     Layout = null;
     }
     
-    <ul>
-        <li>@Html.ActionLink("Profile", "Edit", new { controller = "Users", id = Model.id })</li>
-        <li>@Html.ActionLink("Events", "Index", new { controller = "Events", user_id = Model.id, page = 1 })</li>
-        <li>@Html.ActionLink("Add Event", "Create", new { controller = "Events" })</li>
-        <li>@Html.ActionLink("Locations", "Index", "Locations")</li>
-        <li>@Html.ActionLink("Comments", "Index", "Comments")</li>
+    <ul>       
+        <li>@Html.ActionLink("Add Event", "Create", new { controller = "Events" }, new { target = "_blank" })</li>
+        <li>@Html.ActionLink("Events", "Index", new { controller = "Events", page = 1 }, new { target = "_blank" })</li>
+        <li>@Html.ActionLink("Adresses", "Index", new { controller = "Locations", page = 1 }, new { target = "_blank" })</li>
+        @*<li>@Html.ActionLink("Comments", "Index", "Comments", new { target = "_blank" })</li>*@
     </ul>
 
 
