@@ -77,7 +77,7 @@ namespace MvcAgenda.Tests
         [UrlToTest("http://localhost:41279/")]
         public void IsValidTest()
         {
-            FutureDateAttribute target = new FutureDateAttribute("id",1); // TODO: Initialize to an appropriate value
+            FutureDateAttribute target = new FutureDateAttribute(); // TODO: Initialize to an appropriate value
             object value = null; // TODO: Initialize to an appropriate value
             bool expected = false; // TODO: Initialize to an appropriate value
             bool actual;

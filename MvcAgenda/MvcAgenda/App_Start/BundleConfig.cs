@@ -21,6 +21,9 @@ namespace MvcAgenda
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                        "~/Scripts/bootstrap.js"));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -42,8 +45,10 @@ namespace MvcAgenda
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.datetimepicker.css",
                         "~/Content/themes/base/jquery.ui.theme.css",
-                        "~/Content/themes/base/fullcalendar.css"//,
+                        "~/Content/themes/base/fullcalendar.css",
                         //"~/Content/themes/base/fullcalendar.print.css"
+                        "~/Content/themes/base/bootstrap.css",
+                        "~/Content/themes/base/bootstrap-theme.css"
                         ));
 
             

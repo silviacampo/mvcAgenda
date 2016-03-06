@@ -227,6 +227,11 @@
     <Compile Include="Views\Models\ViewClasses\FormatEventStatusView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\themes\base\bootstrap-theme.css" />
+    <Content Include="Content\themes\base\bootstrap.css" />
+    <Content Include="Content\themes\base\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\themes\base\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\themes\base\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\themes\base\fullcalendar.css" />
     <Content Include="Content\themes\base\fullcalendar.min.css" />
     <Content Include="Content\themes\base\fullcalendar.print.css" />
@@ -287,6 +292,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
@@ -370,6 +376,36 @@
     <Content Include="Views\Shared\EditorTemplates\LocationAutocomplete.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Url.cshtml" />
     <Content Include="Views\Events\Calendar.cshtml" />
+    <None Include="Content\themes\base\font-awesome\fonts\fontawesome-webfont.eot" />
+    <None Include="Content\themes\base\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <None Include="Content\themes\base\font-awesome\fonts\fontawesome-webfont.woff" />
+    <None Include="Content\themes\base\font-awesome\fonts\FontAwesome.otf" />
+    <None Include="Content\themes\base\font-awesome\less\bordered-pulled.less" />
+    <None Include="Content\themes\base\font-awesome\less\core.less" />
+    <None Include="Content\themes\base\font-awesome\less\fixed-width.less" />
+    <None Include="Content\themes\base\font-awesome\less\font-awesome.less" />
+    <None Include="Content\themes\base\font-awesome\less\icons.less" />
+    <None Include="Content\themes\base\font-awesome\less\larger.less" />
+    <None Include="Content\themes\base\font-awesome\less\list.less" />
+    <None Include="Content\themes\base\font-awesome\less\mixins.less" />
+    <None Include="Content\themes\base\font-awesome\less\path.less" />
+    <None Include="Content\themes\base\font-awesome\less\rotated-flipped.less" />
+    <None Include="Content\themes\base\font-awesome\less\spinning.less" />
+    <None Include="Content\themes\base\font-awesome\less\stacked.less" />
+    <None Include="Content\themes\base\font-awesome\less\variables.less" />
+    <None Include="Content\themes\base\font-awesome\less\scss\font-awesome.scss" />
+    <None Include="Content\themes\base\font-awesome\less\scss\_bordered-pulled.scss" />
+    <None Include="Content\themes\base\font-awesome\less\scss\_core.scss" />
+    <None Include="Content\themes\base\font-awesome\less\scss\_fixed-width.scss" />
+    <None Include="Content\themes\base\font-awesome\less\scss\_icons.scss" />
+    <None Include="Content\themes\base\font-awesome\less\scss\_larger.scss" />
+    <None Include="Content\themes\base\font-awesome\less\scss\_list.scss" />
+    <None Include="Content\themes\base\font-awesome\less\scss\_mixins.scss" />
+    <None Include="Content\themes\base\font-awesome\less\scss\_path.scss" />
+    <None Include="Content\themes\base\font-awesome\less\scss\_rotated-flipped.scss" />
+    <None Include="Content\themes\base\font-awesome\less\scss\_spinning.scss" />
+    <None Include="Content\themes\base\font-awesome\less\scss\_stacked.scss" />
+    <None Include="Content\themes\base\font-awesome\less\scss\_variables.scss" />
     <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.Http.WebHost.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.Http.SelfHost.dll" />

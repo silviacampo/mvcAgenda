@@ -96,9 +96,9 @@ namespace MvcAgenda.Controllers
         //
         // GET: /Users/Edit/5
 
-        public ActionResult Edit(string id = "")
+        public ActionResult Edit()
         {
-            user user = repository.Users.Single(u => u.username == id);
+            user user = repository.Users.Single(u => u.username == User.Identity.Name);
             //probably never come in
             if (user == null)
             {

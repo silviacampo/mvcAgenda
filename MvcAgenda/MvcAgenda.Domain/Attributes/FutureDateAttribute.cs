@@ -9,17 +9,9 @@ namespace MvcAgenda
 {
     public class FutureDateAttribute: RequiredAttribute, IClientValidatable
     {
-            private String PropertyName { get; set; }
-    private Object DesiredValue { get; set; }
-
-    public FutureDateAttribute(String propertyName, Object desiredvalue)
-    {
-        PropertyName = propertyName;
-        DesiredValue = desiredvalue;
-    }
         public override bool IsValid(object value)
         {
-           return base.IsValid(value) && value is DateTime && ((DateTime)value) > DateTime.Now;
+            return base.IsValid(value) && value is DateTime && ((DateTime)value) > DateTime.Now;
         }
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
         {

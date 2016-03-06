@@ -74,6 +74,7 @@
     <Compile Include="Concrete\EntFLocationRepository.cs" />
     <Compile Include="Concrete\EntFUserRepository.cs" />
     <Compile Include="Concrete\EntFWDBContext.cs" />
+    <Compile Include="Concrete\FormattedDbEntityValidationException.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\Friend.cs" />

@@ -39,6 +39,13 @@ namespace MvcAgenda
             );
 
             routes.MapRoute(
+                name: "Profile",
+                url: "Users/Profile",
+                defaults: new { controller = "Users", action = "Profile"},
+                namespaces: new[] { "MvcAgenda.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },

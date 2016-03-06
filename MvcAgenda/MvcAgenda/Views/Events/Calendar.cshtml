@@ -17,6 +17,7 @@
                 right: 'month,agendaWeek,agendaDay'
             },
             editable: true,
+            fixedWeekCount: false,
             eventLimit: true, // allow "more" link when too many events
             events: [
             @foreach (var item in Model)
@@ -48,16 +49,6 @@
     });
 
 </script>
-<style>
-    body
-    {
-        margin: 40px 10px;
-        padding: 0;
-        font-family: "Lucida Grande" ,Helvetica,Arial,Verdana,sans-serif;
-        font-size: 14px;
-    }
-    
 
-</style>
 <div id='calendar'>
 </div>

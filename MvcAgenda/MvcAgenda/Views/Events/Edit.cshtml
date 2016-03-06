@@ -49,9 +49,7 @@
             @Html.LabelFor(model => model.location_id)
         </div>
         <div class="editor-field">
-            @Html.HiddenFor(model => model.location.city)
-            @Html.HiddenFor(model => model.location.country)
-            @Html.DisplayFor(model => model.location.city) OR
+            @Html.DisplayFor(model => model.location.label) OR
             @Html.EditorFor(model => model.location_id)
             @Html.ValidationMessageFor(model => model.location_id)
         </div>

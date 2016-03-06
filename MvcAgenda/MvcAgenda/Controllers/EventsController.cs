@@ -162,7 +162,8 @@ namespace MvcAgenda.Controllers
         [HttpPost]
         public ActionResult Edit(aevent aevent)
         {
-
+            this.ModelState.Remove("startTime");
+            this.ModelState.Remove("endTime");
             if (ModelState.IsValid)
             {
                 this.repository.SaveEvent(aevent);
