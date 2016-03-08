@@ -38,7 +38,7 @@
             return false;
         }
     },
-    dayClick: function(date, jsEvent, view) {
+    dayClick: function(date, allDay, jsEvent, view) {
        var url = '@createUrl' + '/' + date.format();
             window.open( url ,'_blank');
             return false;
