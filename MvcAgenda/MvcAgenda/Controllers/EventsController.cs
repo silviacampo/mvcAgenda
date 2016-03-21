@@ -88,7 +88,7 @@ namespace MvcAgenda.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            aevent aevent = this.repository.Events.Single(a => a.id == id);
+            aevent aevent = this.repository.Events.SingleOrDefault(a => a.id == id);
             if (aevent == null)
             {
                 return HttpNotFound();
@@ -105,6 +105,7 @@ namespace MvcAgenda.Controllers
             //ViewBag.users = users;
             DateTime startTimeObj = DateTime.Now;
             if (strStartTime != null && strStartTime.Length > 0)
+                strStartTime = strStartTime.Replace('!', ':');
                 startTimeObj = DateTime.Parse(strStartTime);
             return View(new aevent { startTime = startTimeObj, user_id = 0 });
         }
@@ -146,7 +147,7 @@ namespace MvcAgenda.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            aevent aevent = this.repository.Events.Single(a => a.id == id);
+            aevent aevent = this.repository.Events.SingleOrDefault(a => a.id == id);
             List<SelectListItem> users = getUsers(); 
             ViewBag.users = users;
             if (aevent == null)
@@ -184,12 +185,41 @@ namespace MvcAgenda.Controllers
             return View(aevent);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult EditDate(int id, string strStartTime, string strEndTime)
+        {
+            this.ModelState.Remove("startTime");
+            this.ModelState.Remove("endTime");
+            aevent aevent = this.repository.Events.SingleOrDefault(a => a.id == id);
+            if (aevent == null)
+            {
+                return Json("Wrong Event", JsonRequestBehavior.AllowGet);
+            }
+            else
+            { 
+                if (strStartTime != null && strStartTime.Length > 0)
+                {
+                    aevent.startTime = DateTime.Parse(strStartTime);
+                }
+                if (strEndTime != null && strEndTime.Length > 0)
+                {
+                    aevent.endTime = DateTime.Parse(strEndTime);
+                }
+                this.repository.SaveEvent(aevent);
+
+                SendEventByEmail(emailsender, aevent);
+
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         //
         // GET: /Events/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
-            aevent aevent = this.repository.Events.Single(a => a.id == id);
+            aevent aevent = this.repository.Events.SingleOrDefault(a => a.id == id);
             if (aevent == null)
             {
                 return HttpNotFound();
@@ -203,7 +233,7 @@ namespace MvcAgenda.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            aevent aevent = this.repository.Events.Single(a => a.id == id);
+            aevent aevent = this.repository.Events.SingleOrDefault(a => a.id == id);
             this.repository.DeleteEvent(aevent);
 
             if (User.Identity.Name == "silvia")

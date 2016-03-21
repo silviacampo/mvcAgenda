@@ -1,13 +1,16 @@
 ﻿@model IEnumerable<MvcAgenda.Domain.Entities.aevent>
-
 @{
     Layout = null;
     UrlHelper url = new UrlHelper(HttpContext.Current.Request.RequestContext);
     String createUrl = url.RouteUrl(new { Controller = "Events", Action = "Create" });
+    String editUrl = url.RouteUrl(new { Controller = "Events", Action = "EditDate" });
 }
-
 <script>
-
+    function gettoken() {
+        var tokenTag = '@Html.AntiForgeryToken()'
+        var token = $(tokenTag).val()
+        return token
+    }
     $(document).ready(function () {
 
         $('#calendar').fullCalendar({
@@ -23,6 +26,7 @@
             @foreach (var item in Model)
             {
     <text>{</text>
+            <text>id:'</text> @item.id<text>',</text>
             <text>title:'</text> @item.title<text>',</text>
             <text>description:'</text> @item.description<text>',</text>
             <text>start:'</text> @item.startTime<text>',</text>
@@ -39,9 +43,55 @@
         }
     },
     dayClick: function(date, allDay, jsEvent, view) {
-       var url = '@createUrl' + '/' + date.format();
+       var url = '@createUrl' + '/' + date.format().replace(new RegExp(':', 'g'),'!');
             window.open( url ,'_blank');
             return false;
+    },
+    eventDrop: function(event, delta, revertFunc, jsEvent, ui, view) {
+        var msg = "Are you sure about this change? "+ event.title + " at " + event.start.format('LLL');
+        if (!confirm(msg)) {
+            revertFunc();
+        }
+        else
+        {
+        var formData = {__RequestVerificationToken:gettoken(), id: event.id, strStartTime: event.start.format('LLL'), strEndTime: event.end.format('LLL') };
+        $.ajax({
+            url: '@editUrl',
+            type: "POST",
+            data : formData,
+            success: function(data) {
+                confirm("moved!");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("Error!!!");
+                revertFunc();
+            }
+        });
+        }
+
+    },
+        eventResize: function(event, delta, revertFunc) {
+
+        var msg = "Are you sure about this change? "+ event.title + " ending at " + event.end.format('LLL');
+        if (!confirm(msg)) {
+            revertFunc();
+        }
+        else
+        {
+        var formData = {__RequestVerificationToken:gettoken(), id: event.id, strStartTime: event.start.format('LLL'), strEndTime: event.end.format('LLL') };
+        $.ajax({
+            url: '@editUrl',
+            type: "POST",
+            data : formData,
+            success: function(data) {
+                confirm("Changed!");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("Error!!!");
+                revertFunc();
+            }
+        });
+        }
     }
 
         });
@@ -49,6 +99,5 @@
     });
 
 </script>
-
 <div id='calendar'>
 </div>
