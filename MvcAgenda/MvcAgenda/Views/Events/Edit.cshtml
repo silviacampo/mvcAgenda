@@ -1,62 +1,80 @@
 ﻿@model MvcAgenda.Domain.Entities.aevent
 
 @{
-    ViewBag.Title = "Edit event";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>aevent</legend>
+        <legend>Event</legend>
 
         @Html.HiddenFor(model => model.id)
-
+            <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
         <div class="editor-label">
             @Html.LabelFor(model => model.title)
-        </div>
+        </div>        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
         <div class="editor-field">
             @Html.EditorFor(model => model.title)
             @Html.ValidationMessageFor(model => model.title)
-        </div>
-
+        </div>        </div>
+    </div>
+        <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
         <div class="editor-label">
             @Html.LabelFor(model => model.description)
-        </div>
+        </div>        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
         <div class="editor-field">
             @Html.EditorFor(model => model.description)
             @Html.ValidationMessageFor(model => model.description)
-        </div>
+        </div>        </div>
+    </div>
 
-   @if (User.Identity.Name == "silvia")
+   @if (User.Identity.Name == "admin")
    {
+           <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
              <div class="editor-label">
             @Html.LabelFor(model => model.user_id)
-        </div>
+        </div>        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
        <div class="editor-field">
             @Html.DropDownListFor(model => model.user_id, (List<SelectListItem>)ViewBag.users)
             @Html.ValidationMessageFor(model => model.user_id)
-        </div>
+        </div>        </div>
+    </div>
    }
    else
    {
        Html.RenderAction("UserHiddenField", new { controller = "Users", username = User.Identity.Name });
    }
-
+       <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
         <div class="editor-label">
             @Html.LabelFor(model => model.location_id)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.location.label) OR
+        </div>        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+        
+            @Html.DisplayFor(model => model.location.label) OR 
+                </div>
+     <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+            <div class="editor-field">
             @Html.EditorFor(model => model.location_id)
             @Html.ValidationMessageFor(model => model.location_id)
-        </div>
-
+        </div>        </div>
+    </div>
+        <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
         <div class="editor-label">
             @Html.LabelFor(model => model.startTime)
-        </div>
+        </div>        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
         <div class="editor-field">
          @if (Model.startTime > DateTime.Now)
          { 
@@ -69,11 +87,14 @@
          @Html.HiddenFor(model => model.startTime)
          }
 
-        </div>
-
+        </div>        </div>
+    </div>
+        <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
         <div class="editor-label">
             @Html.LabelFor(model => model.endTime)
-        </div>
+        </div>        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
         <div class="editor-field">
          @if (Model.startTime > DateTime.Now)
          { 
@@ -85,29 +106,31 @@
          @Html.DisplayFor(model => model.endTime)
          @Html.HiddenFor(model => model.endTime)
          }
-        </div>
-
+        </div>        </div>
+    </div>
+        <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
         <div class="editor-label">
             @Html.LabelFor(model => model.url)
-        </div>
+        </div>        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
         <div class="editor-field">
             @Html.EditorFor(model => model.url)
             @Html.ValidationMessageFor(model => model.url)
+        </div>        </div>
+    </div>
+<div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-1 col-xs-2">
+        @Html.FontAwesomeActionLink("Back to List", "Index", null, "fa fa-hand-o-left")
         </div>
+        <div class="col-lg-10 col-md-9 col-sm-11 col-xs-10">
+        <input type="submit" value="Save" />
+        </div>
+    </div>
 
-        <p>
-            <input type="submit" value="Save" />
-        </p>
     </fieldset>
 }
 
-@if (User.Identity.Name == "silvia")
-{
-     
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

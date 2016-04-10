@@ -61,7 +61,7 @@
 </fieldset>
 @using (Html.BeginForm()) {
     <p>
-        <input type="submit" value="Delete" />  @if (User.Identity.Name == "silvia")
+        <input type="submit" value="Delete" />  @if (User.Identity.Name == "admin")
                                                 {  
        @Html.ActionLink("Back to List", "Index")}
     </p>

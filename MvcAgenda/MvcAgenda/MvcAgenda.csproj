@@ -198,6 +198,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiLocationsController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlHelpers\FontAwesomeHelper.cs" />
     <Compile Include="HtmlHelpers\PagingHelpers.cs" />
     <Compile Include="IEmailSender.cs" />
     <Compile Include="Infrastructure\Abstract\IAuthProvider.cs" />
@@ -228,6 +230,13 @@
     <Compile Include="Views\Models\ViewClasses\FormatEventStatusView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\themes\base\bootstrap-notify.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fullcalendar.css" />
     <Content Include="Content\fullcalendar.min.css" />
     <Content Include="Content\fullcalendar.print.css" />
@@ -446,6 +455,8 @@
     <Content Include="Content\jquery.mobile.structure-1.4.5.min.css" />
     <Content Include="Content\jquery.mobile.theme-1.4.5.css" />
     <Content Include="Content\jquery.mobile.theme-1.4.5.min.css" />
+    <Content Include="Content\styles\alert-bangtidy.css" />
+    <Content Include="Content\styles\alert-blackgloss.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -460,6 +471,7 @@
     <Content Include="Content\themes\base\font-awesome\css\font-awesome.css" />
     <Content Include="Content\themes\base\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\themes\base\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\themes\base\font-awesome\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\themes\base\fullcalendar.css" />
     <Content Include="Content\themes\base\fullcalendar.min.css" />
     <Content Include="Content\themes\base\fullcalendar.print.css" />
@@ -489,8 +501,14 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
+    <Content Include="Scripts\bootstrap-notify.js" />
     <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\gcal.js" />
@@ -628,6 +646,9 @@
     <None Include="Content\themes\base\font-awesome\fonts\fontawesome-webfont.ttf" />
     <None Include="Content\themes\base\font-awesome\fonts\fontawesome-webfont.woff" />
     <None Include="Content\themes\base\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\themes\base\font-awesome\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\themes\base\font-awesome\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\themes\base\font-awesome\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\themes\base\font-awesome\less\bordered-pulled.less" />
     <None Include="Content\themes\base\font-awesome\less\core.less" />
     <None Include="Content\themes\base\font-awesome\less\fixed-width.less" />
@@ -654,6 +675,14 @@
     <None Include="Content\themes\base\font-awesome\less\scss\_spinning.scss" />
     <None Include="Content\themes\base\font-awesome\less\scss\_stacked.scss" />
     <None Include="Content\themes\base\font-awesome\less\scss\_variables.scss" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery.mobile-1.4.5.min.map" />
     <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.Http.WebHost.dll" />
@@ -723,6 +752,10 @@
     <ProjectReference Include="..\MvcAgenda.Domain\MvcAgenda.Domain.csproj">
       <Project>{982BBC67-6014-4389-B673-4434B9F38E9F}</Project>
       <Name>MvcAgenda.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MVCAgenda.Resources\MvcAgenda.Resources.csproj">
+      <Project>{4666372E-8A87-4E75-9584-A331F0DC6A73}</Project>
+      <Name>MvcAgenda.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

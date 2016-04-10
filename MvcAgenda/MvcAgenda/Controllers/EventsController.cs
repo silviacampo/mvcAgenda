@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using MvcAgenda.Domain.Abstract;
 using MvcAgenda.Domain.Entities;
 using MvcAgenda.Models;
+using MvcAgenda;
 
 namespace MvcAgenda.Controllers
 {
@@ -65,7 +66,7 @@ namespace MvcAgenda.Controllers
         {
             ListViewModel<aevent> viewModel = new ListViewModel<aevent>
             {
-                Items= repository.Events.Where(e => User.Identity.Name == "" || e.user.username == User.Identity.Name).OrderBy(e => e.startTime).Skip((page - 1) * pageSize).Take(pageSize),
+                Items= repository.Events.Where(e => User.Identity.Name == "" || e.user.username == User.Identity.Name).OrderByDescending(e => e.startTime).Skip((page - 1) * pageSize).Take(pageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
@@ -105,8 +106,11 @@ namespace MvcAgenda.Controllers
             //ViewBag.users = users;
             DateTime startTimeObj = DateTime.Now;
             if (strStartTime != null && strStartTime.Length > 0)
+            {
                 strStartTime = strStartTime.Replace('!', ':');
                 startTimeObj = DateTime.Parse(strStartTime);
+            }
+           //Resources.Events.EventsTitle
             return View(new aevent { startTime = startTimeObj, user_id = 0 });
         }
 
@@ -126,7 +130,7 @@ namespace MvcAgenda.Controllers
 
                 SendEventByEmail(emailsender, aevent);
 
-                if (User.Identity.Name == "silvia")
+                if (User.Identity.Name == "admin")
                 {
                     return RedirectToAction("Index");
                 }
@@ -171,7 +175,7 @@ namespace MvcAgenda.Controllers
 
                 SendEventByEmail(emailsender, aevent);
 
-                if (User.Identity.Name == "silvia")
+                if (User.Identity.Name == "admin")
                 {
                     return RedirectToAction("Index");
                 }
@@ -191,6 +195,7 @@ namespace MvcAgenda.Controllers
         {
             this.ModelState.Remove("startTime");
             this.ModelState.Remove("endTime");
+           
             aevent aevent = this.repository.Events.SingleOrDefault(a => a.id == id);
             if (aevent == null)
             {
@@ -206,6 +211,7 @@ namespace MvcAgenda.Controllers
                 {
                     aevent.endTime = DateTime.Parse(strEndTime);
                 }
+                
                 this.repository.SaveEvent(aevent);
 
                 SendEventByEmail(emailsender, aevent);
@@ -236,7 +242,7 @@ namespace MvcAgenda.Controllers
             aevent aevent = this.repository.Events.SingleOrDefault(a => a.id == id);
             this.repository.DeleteEvent(aevent);
 
-            if (User.Identity.Name == "silvia")
+            if (User.Identity.Name == "admin")
             {
                 return RedirectToAction("Index");
             }

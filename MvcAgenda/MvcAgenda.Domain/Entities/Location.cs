@@ -42,9 +42,26 @@ namespace MvcAgenda.Domain.Entities
          }
 
         public string label { 
-            get { 
-                return ((description=="" || description == null)? "" : (description + " - ")) + ((address=="" || address==null) ? "": (address + ", ")) + city; } }
-    
+            get {
+                return (String.IsNullOrEmpty(description) ? String.Empty : (description + " - ")) + fullAddress;
+            }
+        }
+
+        public string shortLabel
+        {
+            get
+            {
+                return String.IsNullOrEmpty(description) ? city : description;
+            }
+        }
+
+        public string fullAddress
+        {
+            get
+            {
+                 return (String.IsNullOrEmpty(address) ? String.Empty : (address + ", ")) + (String.IsNullOrEmpty(postalcode) ? String.Empty : (postalcode + " - ")) + city + " (" + country + ")";
+            }
+        }
     
     }
 

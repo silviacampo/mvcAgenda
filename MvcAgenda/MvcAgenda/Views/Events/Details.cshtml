@@ -1,67 +1,96 @@
 ﻿@model MvcAgenda.Domain.Entities.aevent
-
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
+<h2>@ViewBag.Title</h2>
 <fieldset>
-    <legend>aevent</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.title)
+    <legend>Event</legend>
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.title)
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+            <div class="display-field">
+                @Html.DisplayFor(model => model.title)
+            </div>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.title)
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.description)
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+            <div class="display-field">
+                @Html.DisplayFor(model => model.description)
+            </div>
+        </div>
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.description)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.description)
-    </div>
-
-    @*<div class="display-label">
+    @*<div class="row">
+    <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12"><div class="display-label">
          @Html.DisplayNameFor(model => model.user_id)
-    </div>
+    </div>    </div>
+    <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
     <div class="display-field">
         @Html.DisplayFor(model => model.user_id)
-    </div>*@
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.location_id)
+    </div>    </div>
+</div>*@
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.location_id)
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+            <div class="display-field">
+                @Html.DisplayFor(model => model.location.label)
+            </div>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.location.label)
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.startTime)
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+            <div class="display-field">
+                @Html.DisplayFor(model => model.startTime)
+            </div>
+        </div>
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.startTime)
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.endTime)
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+            <div class="display-field">
+                @Html.DisplayFor(model => model.endTime)
+            </div>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.startTime)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.endTime)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.endTime)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.url)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.url)
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.url)
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+            <div class="display-field">
+                @Html.DisplayFor(model => model.url)
+            </div>
+        </div>
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) 
-    @Html.ActionLink("Delete", "Delete", new { id = Model.id })
-     @if (User.Identity.Name == "silvia")
-     {  
-       @Html.ActionLink("Back to List", "Index")}
+    @Html.FontAwesomeActionLink("Back to List", "Index", null, "fa fa-hand-o-left")
+    |
+    @Html.FontAwesomeActionLink("Edit", "Edit", new { id = Model.id }, "fa fa-pencil")
+    |
+    @Html.FontAwesomeActionLink("Delete", "Delete", new { id = Model.id }, "fa fa-trash-o")
 </p>

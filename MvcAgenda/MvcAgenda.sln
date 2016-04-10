@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAgenda.Tests", "MvcAgend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAgenda.Domain", "MvcAgenda.Domain\MvcAgenda.Domain.csproj", "{982BBC67-6014-4389-B673-4434B9F38E9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAgenda.Resources", "MVCAgenda.Resources\MvcAgenda.Resources.csproj", "{4666372E-8A87-4E75-9584-A331F0DC6A73}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs27
 		SccLocalPath0 = .
@@ -22,6 +24,9 @@ Global
 		SccProjectUniqueName3 = MvcAgenda\\MvcAgenda.csproj
 		SccProjectName3 = MvcAgenda
 		SccLocalPath3 = MvcAgenda
+		SccProjectUniqueName4 = MVCAgenda.Resources\\MVCAgenda.Resources.csproj
+		SccProjectName4 = MVCAgenda.Resources
+		SccLocalPath4 = MVCAgenda.Resources
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +45,10 @@ Global
 		{982BBC67-6014-4389-B673-4434B9F38E9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{982BBC67-6014-4389-B673-4434B9F38E9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{982BBC67-6014-4389-B673-4434B9F38E9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4666372E-8A87-4E75-9584-A331F0DC6A73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4666372E-8A87-4E75-9584-A331F0DC6A73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4666372E-8A87-4E75-9584-A331F0DC6A73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4666372E-8A87-4E75-9584-A331F0DC6A73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

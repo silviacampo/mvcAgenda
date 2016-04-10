@@ -3,10 +3,11 @@
     $(document).ready(function () {
               $(".datetimepicker").datetimepicker({
              showButtonPanel: true,
+             dateFormat: 'yyyy/mm/dd hh:mm'
             // mask: true
          });
 
     }
 )
 </script>
-@Html.TextBoxFor(m => m, new { @class="datetimepicker" } )
+@Html.TextBoxFor(m => m, new { @class = "datetimepicker", @Value = this.Model ==null ? String.Empty :((DateTime)this.Model).ToString("yyyy/MM/dd hh:mm") })

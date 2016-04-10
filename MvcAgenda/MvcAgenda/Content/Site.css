@@ -99,7 +99,7 @@ h5, h6 {
 ----------------------------------------------------------*/
 .content-wrapper {
     margin: 0 auto;
-    max-width: 960px;
+    //max-width: 960px;
 }
 
 #body {
@@ -751,7 +751,7 @@ tr.pager td {
 #calendarSection {
     border-right: solid 2px #c8c8c8;
     float: left;
-    width: 80%;
+    //width: 80%;
     padding:15px;
     }
         #calendar
@@ -761,8 +761,8 @@ tr.pager td {
     }
     #menuSection
     {
-        padding:10px;
-        margin-left:85%;
+        //padding:10px;
+        //margin-left:85%;
         }
         
         #menuSection ul
@@ -4008,6 +4008,7 @@ select {
   }
   .header.navbar-fixed-top {
     position: fixed;
+    background-color: white;
   }
   .header.scrolled {
     background: #fff;
@@ -4186,6 +4187,13 @@ select {
     position: fixed;
   }
 }
-/* Large devices (large desktops, 1200px and up) */
-
-
+.modal-backdrop.in
+{
+    opacity:0.5 !important;
+    position:fixed; 
+    height:100%;
+}
+.tdWLinks
+{
+    white-space: nowrap;
+    }

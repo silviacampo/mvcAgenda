@@ -22,7 +22,9 @@ namespace MvcAgenda
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                        "~/Scripts/bootstrap.js"));
+                        "~/Scripts/bootstrap.js",
+                        "~/Scripts/bootbox.js",
+                        "~/Scripts/bootstrap-notify.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -53,7 +55,8 @@ namespace MvcAgenda
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                         "~/Content/themes/base/bootstrap.css",
                         "~/Content/themes/base/bootstrap-theme.css",
-                        "~/Content/themes/base/font-awesome/css/font-awesome.css"
+                        "~/Content/themes/base/font-awesome/css/font-awesome.css",
+                        "~/Content/themes/base/bootstrap-notify.css"
                         ));
         }
     }

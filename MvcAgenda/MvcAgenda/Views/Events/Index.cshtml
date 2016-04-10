@@ -1,78 +1,69 @@
 ﻿@*@inherits MvcAgenda.Views.Models.ViewClasses.FormatEventStatusView*@
+@using MvcAgenda.Resources;
 @model MvcAgenda.Models.ListViewModel<MvcAgenda.Domain.Entities.aevent>
 @{
-    ViewBag.Title = "Events";
+    ViewBag.Title = Events.ListTitle;
     UrlHelper url = new UrlHelper(HttpContext.Current.Request.RequestContext);
     String createUrl = url.RouteUrl(new { Controller = "Events", Action = "Create" });
 }
-<h2>
-    Index</h2>
-    <p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    @if (Model.Items.Count() > 0)
-    {
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Items.First().title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items.First().description)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Events.First().user_id)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.Items.First().location_id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items.First().startTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items.First().endTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items.First().url)
-            </th>
-            <th>
-            </th>
-        </tr>
-    }
-    @foreach (var item in Model.Items)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.title)
-                @*@Formatter.Format(0)*@
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.user.username)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.location.city)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.startTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.endTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.url)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
-            </td>
-        </tr>
-    }
-</table>
-<div class="pager">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+        <h2>
+            @Events.ListTitle</h2>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <p>
+            @Html.ActionLink("Add an event", "Create")
+        </p>
+    </div>
 </div>
+@if (Model.Items.Count() == 0)
+{
+        <p>
+            You have not events.
+        </p>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var item in Model.Items)
+        {
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                        <h4 class="list-group-item-heading">
+                            @Html.DisplayFor(modelItem => item.title) -
+                            @Html.DisplayFor(modelItem => item.description)</h4>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 tdWLinks">
+                        @Html.FontAwesomeActionLink("Details", "Details", new { id = item.id }, "fa fa-search")
+                        |
+                        @Html.FontAwesomeActionLink("Edit", "Edit", new { id = item.id }, "fa fa-pencil")
+                        |
+                        @Html.FontAwesomeActionLink("Delete", "Delete", new { id = item.id }, "fa fa-trash-o")
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <span class="badge">@Html.DisplayFor(modelItem => item.startTime) -
+                            @Html.DisplayFor(modelItem => item.endTime)</span> at
+                        @Html.DisplayFor(modelItem => item.location.shortLabel)
+                    </div>
+                </div>
+            </li>
 
+@*
+                @Html.DisplayNameFor(modelItem => item.user.username)
+                @Html.DisplayFor(modelItem => item.user.username)
+            *@
+
+@*      @Html.DisplayNameFor(modelItem => item.url)
+                @Html.DisplayFor(modelItem => item.url)*@
+
+        }
+    </ul>
+
+    <div class="pager">
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+    </div>
+}

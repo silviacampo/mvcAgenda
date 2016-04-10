@@ -86,6 +86,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MVCAgenda.Resources\MvcAgenda.Resources.csproj">
+      <Project>{4666372E-8A87-4E75-9584-A331F0DC6A73}</Project>
+      <Name>MvcAgenda.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

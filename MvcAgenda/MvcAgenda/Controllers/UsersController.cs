@@ -118,7 +118,7 @@ namespace MvcAgenda.Controllers
                 repository.SaveUser(user);
                 //TempData used like viewbag (not usefull, we are redirecting and the data would pass between view and controller only in the current http request) and session(persist too long and should be erased) but deleted at the end of the http request
                 TempData["message"] = string.Format("{0} has been saved", user.username);
-                if (User.Identity.Name == "silvia")
+                if (User.Identity.Name == "admin")
                 {
                     return RedirectToAction("Index");
                 }

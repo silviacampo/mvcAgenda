@@ -49,7 +49,8 @@
     },
     eventDrop: function(event, delta, revertFunc, jsEvent, ui, view) {
         var msg = "Are you sure about this change? "+ event.title + " at " + event.start.format('LLL');
-        if (!confirm(msg)) {
+        bootbox.confirm(msg, function(result) {
+                    if (!result) {
             revertFunc();
         }
         else
@@ -60,20 +61,23 @@
             type: "POST",
             data : formData,
             success: function(data) {
-                confirm("moved!");
+                $('.bottom-right').notify({message: { text: event.title + " moved! " }}).show();
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert("Error!!!");
+                $('.bottom-right').notify({message: { text: "Error!!!" }}).show();
                 revertFunc();
             }
         });
         }
+        }); 
+
 
     },
         eventResize: function(event, delta, revertFunc) {
 
         var msg = "Are you sure about this change? "+ event.title + " ending at " + event.end.format('LLL');
-        if (!confirm(msg)) {
+        bootbox.confirm(msg, function(result) {
+                    if (!result) {
             revertFunc();
         }
         else
@@ -84,14 +88,15 @@
             type: "POST",
             data : formData,
             success: function(data) {
-                confirm("Changed!");
+                $('.bottom-right').notify({message: { text: event.title + " changed! " }}).show();
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert("Error!!!");
+                $('.bottom-right').notify({message: { text: "Error!!!" }}).show();
                 revertFunc();
             }
         });
         }
+        }); 
     }
 
         });

@@ -66,12 +66,14 @@ namespace MvcAgenda.Domain.Entities
 
         [DisplayName("Starting")]
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Start Time can't be empty")]
         [FutureDate(ErrorMessage = "Start Time must be a date in the future")]
         public global::System.DateTime startTime { get; set; }
 
         [DisplayName("Ending")]
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
         [FutureDate(ErrorMessage = "End Time must be a date in the future")]
         public Nullable<global::System.DateTime> endTime { get; set; }
 

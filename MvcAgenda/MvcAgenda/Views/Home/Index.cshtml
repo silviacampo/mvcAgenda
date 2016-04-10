@@ -1,14 +1,15 @@
 ﻿@{
     ViewBag.Title = "";
 }
-<div class=></div>
-<section id="calendarSection">
+<div class="row">
+    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+        <section id="calendarSection">
 @if (Request.IsAuthenticated)
 {
 
     Html.RenderAction("Calendar", new { controller = "Events", id = User.Identity.Name });
 
-    if (User.Identity.Name == "silvia")
+    if (User.Identity.Name == "admin")
     {
        <ul>
        <li>@Html.ActionLink("Users", "Index", "Users")</li>
@@ -29,6 +30,8 @@ else
     </p> 
 }
 </section>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
 <section id="menuSection">
 @if (Request.IsAuthenticated)
 {
@@ -36,7 +39,7 @@ else
 
     Html.RenderAction("UserMenu", new { controller = "Users", username = User.Identity.Name });
 
-    if (User.Identity.Name == "silvia")
+    if (User.Identity.Name == "admin")
     {
        <ul>
        <li>@Html.ActionLink("Users", "Index", "Users")</li>
@@ -57,4 +60,8 @@ else
 
 }
 </section>
+    </div>
+</div>
+
+
 

@@ -1,78 +1,106 @@
 ﻿@model MvcAgenda.Domain.Entities.location
 
 @{
-    ViewBag.Title = "Add location";
+    ViewBag.Title = "Add a location";
 }
 
-<h2>Create</h2>
+<h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm())
-{
+@using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>location</legend>
+        <legend>Location</legend>
          @{
     Html.RenderAction("UserHiddenField", new { controller = "Users", username = User.Identity.Name });            
 }
+<div class="row">
+    <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
         <div class="editor-label">
             @Html.LabelFor(model => model.description)
         </div>
+            </div>
+    <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
         <div class="editor-field">
             @Html.EditorFor(model => model.description)
             @Html.ValidationMessageFor(model => model.description)
         </div>
-
+            </div>
+</div>
+<div class="row">
+    <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
                 <div class="editor-label">
             @Html.LabelFor(model => model.address)
         </div>
+            </div>
+    <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
         <div class="editor-field">
             @Html.EditorFor(model => model.address)
             @Html.ValidationMessageFor(model => model.address)
         </div>
-
+            </div>
+</div>
+<div class="row">
+    <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
                 <div class="editor-label">
             @Html.LabelFor(model => model.postalcode)
         </div>
+            </div>
+    <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
         <div class="editor-field">
             @Html.EditorFor(model => model.postalcode)
             @Html.ValidationMessageFor(model => model.postalcode)
         </div>
-
+            </div>
+</div>
+<div class="row">
+    <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
         <div class="editor-label">
             @Html.LabelFor(model => model.city)
-        </div>
+        </div>    </div>
+    <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
         <div class="editor-field">
             @Html.EditorFor(model => model.city)
             @Html.ValidationMessageFor(model => model.city)
         </div>
-
+            </div>
+</div>
+<div class="row">
+    <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
         <div class="editor-label">
             @Html.LabelFor(model => model.country)
-        </div>
+        </div>    </div>
+    <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
         <div class="editor-field">
             @Html.EditorFor(model => model.country)
             @Html.ValidationMessageFor(model => model.country)
         </div>
-
+            </div>
+</div>
+<div class="row">
+    <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
         <div class="editor-label">
             @Html.LabelFor(model => model.timezone)
-        </div>
+        </div>    </div>
+    <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
         <div class="editor-field"> 
              @Html.EditorFor(model => model.timezone)       
              @Html.ValidationMessageFor(model => model.timezone)
-        </div><div style="clear:both;"  /> 
-
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
+        </div>
+            </div>
+</div>
+<div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-1 col-xs-2">
+        @Html.FontAwesomeActionLink("Back to List", "Index", null, "fa fa-hand-o-left")
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-11 col-xs-10">
+        <input type="submit" value="Save" />
+        </div>
+    </div>
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

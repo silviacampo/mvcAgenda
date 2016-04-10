@@ -32,7 +32,7 @@
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.id }) 
-   @if (User.Identity.Name == "silvia")
+   @if (User.Identity.Name == "admin")
         {  
        @Html.ActionLink("Back to List", "Index")}
 </p>

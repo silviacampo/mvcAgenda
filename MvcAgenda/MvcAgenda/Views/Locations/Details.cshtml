@@ -1,57 +1,87 @@
 ﻿@model MvcAgenda.Domain.Entities.location
-
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
+<h2>@ViewBag.Title</h2>
 <fieldset>
-    <legend>location</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.description)
+    <legend>Location</legend>
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.description)
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+            <div class="display-field">
+                @Html.DisplayFor(model => model.description)
+            </div>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.description)
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.address)
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+            <div class="display-field">
+                @Html.DisplayFor(model => model.address)
+            </div>
+        </div>
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.address)
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.postalcode)
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+            <div class="display-field">
+                @Html.DisplayFor(model => model.postalcode)
+            </div>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.address)
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.city)
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+            <div class="display-field">
+                @Html.DisplayFor(model => model.city)
+            </div>
+        </div>
     </div>
-
-        <div class="display-label">
-         @Html.DisplayNameFor(model => model.postalcode)
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.country)
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+            <div class="display-field">
+                @Html.DisplayFor(model => model.country)
+            </div>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.postalcode)
-    </div>
-
-        <div class="display-label">
-         @Html.DisplayNameFor(model => model.city)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.city)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.country)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.country)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.timezone)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.timezone)
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.timezone)
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+            <div class="display-field">
+                @Html.DisplayFor(model => model.timezone)
+            </div>
+        </div>
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.FontAwesomeActionLink("Back to List", "Index", null, "fa fa-hand-o-left")
+    |
+    @Html.FontAwesomeActionLink("Edit", "Edit", new { id = Model.id }, "fa fa-pencil")
+    |
+    @Html.FontAwesomeActionLink("Delete", "Delete", new { id = Model.id }, "fa fa-trash-o")
 </p>
