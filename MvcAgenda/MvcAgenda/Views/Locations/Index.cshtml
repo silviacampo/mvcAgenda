@@ -3,12 +3,51 @@
 @{
     ViewBag.Title = "Locations";
 }
+<style>
+.bootbox-body .tdWLinks
+{
+    display:none;
+    }
+</style>
+<script>
+    function gettoken() {
+        var tokenTag = '@Html.AntiForgeryToken()'
+        var token = $(tokenTag).val()
+        return token
+    }
+    function errorHappens(){
+        $('.bottom-right').notify({ message: { text: "Error:The location cannot be deleted."} }).show();
+    }
+    $(document).on("click", ".deleteLink", function (e) {
+        var link = $(this).attr("href"); // "get" the intended link in a var
+        var html = $(this).parents('.list-group-item');
+        e.preventDefault();
+        bootbox.confirm("Are you sure you want to delete?:<br/>" + html.prop('outerHTML'), function (result) {
+            if (result) {
+                var formData = { __RequestVerificationToken: gettoken() };
+                $.ajax({
+                    url: link,
+                    type: "POST",
+                    data: formData,
+                    success: function (data) {
+                        if (data) {
+                            var description = html.find(".list-group-item-heading").text();
+                            html.remove();
+                            $('.bottom-right').notify({ message: { text: description + " deleted! "} }).show();
+                        }
+                        else {
+                            errorHappens();
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        errorHappens();
+                    }
+                });
+            }
+        });
+    });
+</script>
 
-<div id="message">
-@{//Html.RenderAction("Delete", new { controller = "Locations", id = 1 });
-  
-}
-</div>
 <div class="row">
     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
         <h2>Locations</h2>
@@ -41,7 +80,7 @@ else
                         |
                         @Html.FontAwesomeActionLink("Edit", "Edit", new { id = item.id }, "fa fa-pencil")
                         |
-                        @Html.FontAwesomeActionLink("Delete", "Delete", new { id = item.id }, "fa fa-trash-o")
+                        @Html.FontAwesomeActionLink("Delete", "Delete", new { id = item.id }, "fa fa-trash-o", new { @class = "deleteLink" })
                     </div>
                 </div>
                 <div class="row">

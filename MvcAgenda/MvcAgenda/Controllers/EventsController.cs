@@ -199,7 +199,7 @@ namespace MvcAgenda.Controllers
             aevent aevent = this.repository.Events.SingleOrDefault(a => a.id == id);
             if (aevent == null)
             {
-                return Json("Wrong Event", JsonRequestBehavior.AllowGet);
+                return Json(false, JsonRequestBehavior.AllowGet);
             }
             else
             { 
@@ -236,20 +236,36 @@ namespace MvcAgenda.Controllers
         //
         // POST: /Events/Delete/5
 
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            aevent aevent = this.repository.Events.SingleOrDefault(a => a.id == id);
-            this.repository.DeleteEvent(aevent);
+        //[HttpPost, ActionName("Delete")]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    aevent aevent = this.repository.Events.SingleOrDefault(a => a.id == id);
+        //    this.repository.DeleteEvent(aevent);
 
-            if (User.Identity.Name == "admin")
+        //    if (User.Identity.Name == "admin")
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("Index", new { controller = "Home" });
+        //    }
+        //}
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public JsonResult DeleteConfirmed(int id)
+        {
+            aevent aevent = repository.Events.SingleOrDefault(l => l.id == id);
+            if (repository.DeleteEvent(aevent))
             {
-                return RedirectToAction("Index");
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return RedirectToAction("Index", new { controller = "Home" });
+                return Json(false, JsonRequestBehavior.AllowGet);
             }
+
         }
 
         protected override void Dispose(bool disposing)

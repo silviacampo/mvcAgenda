@@ -12,6 +12,6 @@ namespace MvcAgenda.Domain.Abstract
         IQueryable<location> Locations { get; }
 
         void SaveLocation(location location);
-        void DeleteLocation(location location);
+        bool DeleteLocation(location location);
     }
 }

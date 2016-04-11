@@ -31,10 +31,19 @@ namespace MvcAgenda.Domain.Concrete
             context.SaveChanges();
         }
 
-        public void DeleteEvent(aevent aevent)
+        public bool DeleteEvent(aevent aevent)
         {
-            context.aevent.Remove(aevent);
-            context.SaveChanges();
+            try
+            {
+                context.aevent.Remove(aevent);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
     }
 }

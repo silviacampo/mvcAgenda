@@ -119,12 +119,26 @@ namespace MvcAgenda.Controllers
         //
         // POST: /Locations/Delete/5
 
+        //[HttpPost, ActionName("Delete")]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    location location = repository.Locations.SingleOrDefault(l => l.id == id);
+        //    repository.DeleteLocation(location);
+        //    return RedirectToAction("Index");
+        //}
+
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        [ValidateAntiForgeryToken]
+        public JsonResult DeleteConfirmed(int id)
         {
-            location location = repository.Locations.Single(l => l.id == id);
-            repository.DeleteLocation(location);
-            return RedirectToAction("Index");
+            location location = repository.Locations.SingleOrDefault(l => l.id == id);
+            if (repository.DeleteLocation(location)) {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+
         }
 
         protected override void Dispose(bool disposing)

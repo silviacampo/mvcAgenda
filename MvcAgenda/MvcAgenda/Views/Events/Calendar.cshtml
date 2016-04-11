@@ -11,6 +11,10 @@
         var token = $(tokenTag).val()
         return token
     }
+    function errorHappens() {
+        $('.bottom-right').notify({message: { text: "Error!!!"}}).show();
+        revertFunc();
+    }
     $(document).ready(function () {
 
         $('#calendar').fullCalendar({
@@ -61,11 +65,15 @@
             type: "POST",
             data : formData,
             success: function(data) {
-                $('.bottom-right').notify({message: { text: event.title + " moved! " }}).show();
+            if (data){
+               $('.bottom-right').notify({message: { text: event.title + " moved! " }}).show();
+            }
+            else{
+                errorHappens();            
+            }
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                $('.bottom-right').notify({message: { text: "Error!!!" }}).show();
-                revertFunc();
+                errorHappens();
             }
         });
         }
@@ -77,7 +85,7 @@
 
         var msg = "Are you sure about this change? "+ event.title + " ending at " + event.end.format('LLL');
         bootbox.confirm(msg, function(result) {
-                    if (!result) {
+        if (!result) {
             revertFunc();
         }
         else
@@ -88,11 +96,15 @@
             type: "POST",
             data : formData,
             success: function(data) {
+            if (data){
                 $('.bottom-right').notify({message: { text: event.title + " changed! " }}).show();
+                }
+            else{
+                errorHappens();
+                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                $('.bottom-right').notify({message: { text: "Error!!!" }}).show();
-                revertFunc();
+                errorHappens();
             }
         });
         }

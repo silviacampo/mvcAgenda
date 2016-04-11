@@ -33,10 +33,17 @@ namespace MvcAgenda.Domain.Concrete
             context.SaveChanges();
         }
 
-        public void DeleteLocation(location location)
+        public bool DeleteLocation(location location)
         {
-            context.location.Remove(location);
-            context.SaveChanges();
+            try {
+                context.location.Remove(location);
+                context.SaveChanges();
+                return true;            
+            }
+            catch(Exception e){
+                return false;
+            }
+
         }
     }
 }

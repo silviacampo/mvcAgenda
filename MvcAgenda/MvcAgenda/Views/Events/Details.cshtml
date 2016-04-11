@@ -1,8 +1,52 @@
 ﻿@model MvcAgenda.Domain.Entities.aevent
 @{
     ViewBag.Title = "Details";
+    UrlHelper url = new UrlHelper(HttpContext.Current.Request.RequestContext);
+    String listUrl = url.RouteUrl(new { Controller = "Events", Action = "Index" });
 }
 <h2>@ViewBag.Title</h2>
+
+<script>
+    function gettoken() {
+        var tokenTag = '@Html.AntiForgeryToken()'
+        var token = $(tokenTag).val()
+        return token
+    }
+    function errorHappens() {
+        $('.bottom-right').notify({ message: { text: "Error:The event cannot be deleted."} }).show();
+    }
+    function goToList() {
+        location.href = '@listUrl';
+    }
+    $(document).on("click", ".deleteLink", function (e) {
+        var link = $(this).attr("href"); // "get" the intended link in a var
+        var description = $(".display-field:first").text() + " - " + $(".display-field:eq(1)").text();
+        e.preventDefault();
+        bootbox.confirm("Are you sure you want to delete?:<br/>" + description, function (result) {
+            if (result) {
+                var formData = { __RequestVerificationToken: gettoken() };
+                $.ajax({
+                    url: link,
+                    type: "POST",
+                    data: formData,
+                    success: function (data) {
+                        if (data) {
+                            $('.bottom-right').notify({ message: { text: description + " deleted! "} }).show();
+                            window.setTimeout(goToList, 1000);                            
+                        }
+                        else {
+                            errorHappens();
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        errorHappens();
+                    }
+                });
+            }
+        });
+    });
+</script>
+
 <fieldset>
     <legend>Event</legend>
     <div class="row">
@@ -92,5 +136,5 @@
     |
     @Html.FontAwesomeActionLink("Edit", "Edit", new { id = Model.id }, "fa fa-pencil")
     |
-    @Html.FontAwesomeActionLink("Delete", "Delete", new { id = Model.id }, "fa fa-trash-o")
+    @Html.FontAwesomeActionLink("Delete", "Delete", new { id = Model.id }, "fa fa-trash-o", new { @class = "deleteLink" })
 </p>
