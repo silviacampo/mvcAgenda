@@ -39,7 +39,7 @@ namespace MvcAgenda.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MVCAgenda.Resources.Events", typeof(Events).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MvcAgenda.Resources.Events", typeof(Events).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,42 @@ namespace MvcAgenda.Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an event.
+        /// </summary>
+        public static string addLink {
+            get {
+                return ResourceManager.GetString("addLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a location.
+        /// </summary>
+        public static string addLocatinLink {
+            get {
+                return ResourceManager.GetString("addLocatinLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an event.
+        /// </summary>
+        public static string AddTitle {
+            get {
+                return ResourceManager.GetString("AddTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back to list.
+        /// </summary>
+        public static string backToListLink {
+            get {
+                return ResourceManager.GetString("backToListLink", resourceCulture);
             }
         }
         
@@ -79,11 +115,38 @@ namespace MvcAgenda.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string deleteLink {
+            get {
+                return ResourceManager.GetString("deleteLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View.
         /// </summary>
         public static string Details {
             get {
                 return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string detailsLink {
+            get {
+                return ResourceManager.GetString("detailsLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string DetailsTitle {
+            get {
+                return ResourceManager.GetString("DetailsTitle", resourceCulture);
             }
         }
         
@@ -97,6 +160,258 @@ namespace MvcAgenda.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string editLink {
+            get {
+                return ResourceManager.GetString("editLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string EditTitle {
+            get {
+                return ResourceManager.GetString("EditTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comments.
+        /// </summary>
+        public static string eventComments {
+            get {
+                return ResourceManager.GetString("eventComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete?:.
+        /// </summary>
+        public static string eventDeleteConfirmMsg {
+            get {
+                return ResourceManager.GetString("eventDeleteConfirmMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error:The event cannot be deleted..
+        /// </summary>
+        public static string eventDeleteErrorMsg {
+            get {
+                return ResourceManager.GetString("eventDeleteErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to deleted!.
+        /// </summary>
+        public static string eventDeleteSucessMsg {
+            get {
+                return ResourceManager.GetString("eventDeleteSucessMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string eventDescription {
+            get {
+                return ResourceManager.GetString("eventDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max 200 char.
+        /// </summary>
+        public static string eventDescriptionMaxLengthMsg {
+            get {
+                return ResourceManager.GetString("eventDescriptionMaxLengthMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure about this change?.
+        /// </summary>
+        public static string eventEditDateConfirmMsg {
+            get {
+                return ResourceManager.GetString("eventEditDateConfirmMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error:The event dates cannot be modified..
+        /// </summary>
+        public static string eventEditDateErrorMsg {
+            get {
+                return ResourceManager.GetString("eventEditDateErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to updated!.
+        /// </summary>
+        public static string eventEditDateSucessMsg {
+            get {
+                return ResourceManager.GetString("eventEditDateSucessMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ending.
+        /// </summary>
+        public static string eventEndTime {
+            get {
+                return ResourceManager.GetString("eventEndTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End time must be a date in the future.
+        /// </summary>
+        public static string eventEndTimeFutureDateMsg {
+            get {
+                return ResourceManager.GetString("eventEndTimeFutureDateMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Event cannot finish before staring.
+        /// </summary>
+        public static string eventEndTimeGreaterStartTime {
+            get {
+                return ResourceManager.GetString("eventEndTimeGreaterStartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location.
+        /// </summary>
+        public static string eventLocation {
+            get {
+                return ResourceManager.GetString("eventLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must choose a location.
+        /// </summary>
+        public static string eventLocationRange {
+            get {
+                return ResourceManager.GetString("eventLocationRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting.
+        /// </summary>
+        public static string eventStartTime {
+            get {
+                return ResourceManager.GetString("eventStartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start time must be a date in the future.
+        /// </summary>
+        public static string eventStartTimeFutureDateMsg {
+            get {
+                return ResourceManager.GetString("eventStartTimeFutureDateMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start time can&apos;t be empty.
+        /// </summary>
+        public static string eventStartTimeRequiredMsg {
+            get {
+                return ResourceManager.GetString("eventStartTimeRequiredMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string eventTitle {
+            get {
+                return ResourceManager.GetString("eventTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max 50 char.
+        /// </summary>
+        public static string eventTitleMaxLengthMsg {
+            get {
+                return ResourceManager.GetString("eventTitleMaxLengthMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title can&apos;t be empty.
+        /// </summary>
+        public static string eventTitleRequiredMsg {
+            get {
+                return ResourceManager.GetString("eventTitleRequiredMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to URL.
+        /// </summary>
+        public static string eventUrl {
+            get {
+                return ResourceManager.GetString("eventUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to URL is not valid.
+        /// </summary>
+        public static string eventUrlInvalidMsg {
+            get {
+                return ResourceManager.GetString("eventUrlInvalidMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max 200 char.
+        /// </summary>
+        public static string eventUrlMaxLengthMsg {
+            get {
+                return ResourceManager.GetString("eventUrlMaxLengthMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to URL can&apos;t be empty.
+        /// </summary>
+        public static string eventUrlRequiredMsg {
+            get {
+                return ResourceManager.GetString("eventUrlRequiredMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        public static string eventUser {
+            get {
+                return ResourceManager.GetString("eventUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must choose a user.
+        /// </summary>
+        public static string eventUserRange {
+            get {
+                return ResourceManager.GetString("eventUserRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Event.
         /// </summary>
         public static string ItemTitle {
@@ -106,11 +421,38 @@ namespace MvcAgenda.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have not events..
+        /// </summary>
+        public static string ListEmpty {
+            get {
+                return ResourceManager.GetString("ListEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Events.
         /// </summary>
         public static string ListTitle {
             get {
                 return ResourceManager.GetString("ListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OR.
+        /// </summary>
+        public static string or {
+            get {
+                return ResourceManager.GetString("or", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
     }

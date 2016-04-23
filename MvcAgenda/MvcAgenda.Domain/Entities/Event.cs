@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Objects.DataClasses;
+using System.Web.Mvc;
+using MvcAgenda.Resources;
 
 namespace MvcAgenda.Domain.Entities
 {
@@ -45,46 +47,48 @@ namespace MvcAgenda.Domain.Entities
     }
     public class eventMetaData
     {
-        [DisplayName("Title")]
-        [Required(ErrorMessage = "Title can't be empty")]
-        [StringLength(50, ErrorMessage = "Max 50 char")]
+        [Display(Name = "eventTitle" , ResourceType = typeof(Events))]
+        [Required(ErrorMessageResourceName = "eventTitleRequiredMsg", ErrorMessageResourceType = typeof(Events))]
+        [StringLength(50, ErrorMessageResourceName = "eventTitleMaxLengthMsg", ErrorMessageResourceType = typeof(Events))]
         public global::System.String title { get; set; }
 
-        [DisplayName("Description")]
+        [Display(Name = "eventDescription", ResourceType = typeof(Events))]
         [DataType(DataType.MultilineText)]
-        [StringLength(200, ErrorMessage = "Max 200 char")]
+        [StringLength(200, ErrorMessageResourceName = "eventDescriptionMaxLengthMsg", ErrorMessageResourceType = typeof(Events))]
         public global::System.String description { get; set; }
 
-         [DisplayName("User")]
-        [Range(1, int.MaxValue, ErrorMessage = "You must choose a user")]
+         [Display(Name = "eventUser", ResourceType = typeof(Events))]
+         [Range(1, int.MaxValue, ErrorMessageResourceName = "eventUserRange", ErrorMessageResourceType = typeof(Events))]
         public global::System.Int32 user_id { get; set; }
 
-         [DisplayName("Location")]
+         [Display(Name = "eventLocation", ResourceType = typeof(Events))]
          [UIHint("LocationAutocomplete")]
-        [Range(1, int.MaxValue, ErrorMessage = "You must choose a location")]
+         [Range(1, int.MaxValue, ErrorMessageResourceName = "eventLocationRange", ErrorMessageResourceType = typeof(Events))]
         public global::System.Int32 location_id { get; set; }
 
-        [DisplayName("Starting")]
+        [Display(Name = "eventStartTime", ResourceType = typeof(Events))]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
-        [Required(ErrorMessage = "Start Time can't be empty")]
-        [FutureDate(ErrorMessage = "Start Time must be a date in the future")]
+        [Required(ErrorMessageResourceName = "eventStartTimeRequiredMsg", ErrorMessageResourceType = typeof(Events))]
+        [Remote("IsStartDateValid", "Events", AdditionalFields = "endTime, id")]
+        //[FutureDate(ErrorMessage = Events.eventStartTimeFutureDateMsg)]
         public global::System.DateTime startTime { get; set; }
 
-        [DisplayName("Ending")]
+        [Display(Name = "eventEndTime", ResourceType = typeof(Events))]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
-        [FutureDate(ErrorMessage = "End Time must be a date in the future")]
+        [Remote("IsEndDateValid", "Events", AdditionalFields = "startTime, id")]
+        //[FutureDate(ErrorMessage = Events.eventEndTimeFutureDateMsg)]
         public Nullable<global::System.DateTime> endTime { get; set; }
 
-        [DisplayName("URL")]
+        [Display(Name = "eventUrl", ResourceType = typeof(Events))]
         [UIHint("Url")]
-        [Required(AllowEmptyStrings = true, ErrorMessage = "URL can't be empty")]
-        [StringLength(200, ErrorMessage = "Max 200 char")]
-        [RegularExpression(@"(https?://)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*/?", ErrorMessage = "URL is not valid")]
+        [Required(AllowEmptyStrings = true, ErrorMessageResourceName = "eventUrlRequiredMsg", ErrorMessageResourceType = typeof(Events))]
+        [StringLength(200, ErrorMessageResourceName = "eventUrlMaxLengthMsg", ErrorMessageResourceType = typeof(Events))]
+        [RegularExpression(@"(https?://)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*/?", ErrorMessageResourceName = "eventUrlInvalidMsg", ErrorMessageResourceType = typeof(Events))]
         public global::System.String url { get; set; }
 
-        [DisplayName("Comments")]
+        [Display(Name = "eventComments", ResourceType = typeof(Events))]
         public EntityCollection<comment> comments { get; set; }
     }
 }

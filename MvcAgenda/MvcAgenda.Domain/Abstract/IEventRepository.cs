@@ -10,7 +10,7 @@ namespace MvcAgenda.Domain.Abstract
     {
         IQueryable<aevent> Events { get; }
 
-        void SaveEvent(aevent aevent);
+        bool SaveEvent(aevent aevent);
         bool DeleteEvent(aevent aevent);
     }
 }

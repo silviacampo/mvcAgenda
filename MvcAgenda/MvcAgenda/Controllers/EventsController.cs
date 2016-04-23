@@ -21,7 +21,7 @@ namespace MvcAgenda.Controllers
         {
             this.emailsender = emailsender;
             this.repository = repository;
-        
+
         }
 
         public EventsController(IEventRepository repository)
@@ -50,9 +50,9 @@ namespace MvcAgenda.Controllers
             if (TempData["users"] == null)
             {
                 //List<SelectListItem> users = (from u in db.users.AsEnumerable()
-               //                               select new SelectListItem() { Text = u.username, Value = u.id.ToString() }).ToList();
-               // users.Add(new SelectListItem() { Text = "Choose", Value = "0" });
-               // TempData["users"] = users;
+                //                               select new SelectListItem() { Text = u.username, Value = u.id.ToString() }).ToList();
+                // users.Add(new SelectListItem() { Text = "Choose", Value = "0" });
+                // TempData["users"] = users;
             }
             return (List<SelectListItem>)TempData["users"];
         }
@@ -66,7 +66,7 @@ namespace MvcAgenda.Controllers
         {
             ListViewModel<aevent> viewModel = new ListViewModel<aevent>
             {
-                Items= repository.Events.Where(e => User.Identity.Name == "" || e.user.username == User.Identity.Name).OrderByDescending(e => e.startTime).Skip((page - 1) * pageSize).Take(pageSize),
+                Items = repository.Events.Where(e => User.Identity.Name == "" || e.user.username == User.Identity.Name).OrderByDescending(e => e.startTime).Skip((page - 1) * pageSize).Take(pageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
@@ -110,7 +110,6 @@ namespace MvcAgenda.Controllers
                 strStartTime = strStartTime.Replace('!', ':');
                 startTimeObj = DateTime.Parse(strStartTime);
             }
-           //Resources.Events.EventsTitle
             return View(new aevent { startTime = startTimeObj, user_id = 0 });
         }
 
@@ -120,24 +119,15 @@ namespace MvcAgenda.Controllers
         [HttpPost]
         public ActionResult Create(aevent aevent)
         {
-            //if (ModelState.IsValidField("startTime") && ModelState.IsValidField("endTime") && aevent.startTime.CompareTo(aevent.endTime) >=0)
-           // {
-           // ModelState.AddModelError("","Event cannot finish before staring");
-           // }
             if (ModelState.IsValid)
             {
-                this.repository.SaveEvent(aevent);
-
-                SendEventByEmail(emailsender, aevent);
-
-                if (User.Identity.Name == "admin")
+                if (this.repository.SaveEvent(aevent))
                 {
+
+                    SendEventByEmail(emailsender, aevent);
                     return RedirectToAction("Index");
                 }
-                else
-                {
-                    return RedirectToAction("Index", new { controller = "Home"});
-                }
+
             }
             List<SelectListItem> users = getUsers();
             ViewBag.users = users;
@@ -152,7 +142,7 @@ namespace MvcAgenda.Controllers
         public ActionResult Edit(int id = 0)
         {
             aevent aevent = this.repository.Events.SingleOrDefault(a => a.id == id);
-            List<SelectListItem> users = getUsers(); 
+            List<SelectListItem> users = getUsers();
             ViewBag.users = users;
             if (aevent == null)
             {
@@ -167,21 +157,13 @@ namespace MvcAgenda.Controllers
         [HttpPost]
         public ActionResult Edit(aevent aevent)
         {
-            this.ModelState.Remove("startTime");
-            this.ModelState.Remove("endTime");
             if (ModelState.IsValid)
             {
-                this.repository.SaveEvent(aevent);
-
-                SendEventByEmail(emailsender, aevent);
-
-                if (User.Identity.Name == "admin")
+                if (this.repository.SaveEvent(aevent))
                 {
+                    //SendEventByEmail(emailsender, aevent);
+
                     return RedirectToAction("Index");
-                }
-                else
-                {
-                    return RedirectToAction("Index", new { controller = "Home" });
                 }
             }
             //List<SelectListItem> users = getUsers();
@@ -193,16 +175,13 @@ namespace MvcAgenda.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult EditDate(int id, string strStartTime, string strEndTime)
         {
-            this.ModelState.Remove("startTime");
-            this.ModelState.Remove("endTime");
-           
             aevent aevent = this.repository.Events.SingleOrDefault(a => a.id == id);
             if (aevent == null)
             {
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
             else
-            { 
+            {
                 if (strStartTime != null && strStartTime.Length > 0)
                 {
                     aevent.startTime = DateTime.Parse(strStartTime);
@@ -211,12 +190,18 @@ namespace MvcAgenda.Controllers
                 {
                     aevent.endTime = DateTime.Parse(strEndTime);
                 }
-                
-                this.repository.SaveEvent(aevent);
 
-                SendEventByEmail(emailsender, aevent);
+                if (this.repository.SaveEvent(aevent))
+                {
 
-                return Json(true, JsonRequestBehavior.AllowGet);
+                    //SendEventByEmail(emailsender, aevent);
+
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
             }
         }
 
@@ -285,7 +270,7 @@ namespace MvcAgenda.Controllers
             DateTime parsedDate;
             if (!DateTime.TryParse(startingDate, out parsedDate))
             {
-                return Json("Please enter a valid date",JsonRequestBehavior.AllowGet);
+                return Json("Please enter a valid date", JsonRequestBehavior.AllowGet);
             }
             else if (!repository.Events.Any(u => u.user_id == userid && u.startTime == parsedDate))
             {
@@ -296,6 +281,47 @@ namespace MvcAgenda.Controllers
                 string msg = String.Format("{0} is not available.", startingDate.ToString());
                 return Json(msg, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public JsonResult IsStartDateValid(DateTime startTime, DateTime? endTime, int id = 0)
+        {
+                if (id == 0)
+                {
+                    if (startTime < DateTime.Now)
+                    {
+                        return Json(Resources.Events.eventStartTimeFutureDateMsg, JsonRequestBehavior.AllowGet);
+                    }
+                }
+
+                if (endTime != null)
+                {
+                    if (startTime.CompareTo(endTime) >= 0)
+                    {
+                        return Json(Resources.Events.eventEndTimeGreaterStartTime, JsonRequestBehavior.AllowGet);
+                    }
+                }
+
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult IsEndDateValid(DateTime startTime, DateTime? endTime, int id = 0)
+        {
+            if (endTime != null)
+            {
+                if (id == 0)
+                {
+                    if (endTime < DateTime.Now)
+                    {
+                        return Json(Resources.Events.eventEndTimeFutureDateMsg, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                if (startTime.CompareTo(endTime) >= 0)
+                {
+                    return Json(Resources.Events.eventEndTimeGreaterStartTime, JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
     }

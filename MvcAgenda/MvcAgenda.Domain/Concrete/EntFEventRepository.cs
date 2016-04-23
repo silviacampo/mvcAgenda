@@ -18,7 +18,7 @@ namespace MvcAgenda.Domain.Concrete
                 return context.aevent.Include(b => b.location).Include(b => b.user);
             }
         }
-        public void SaveEvent(aevent aevent)
+        public bool SaveEvent(aevent aevent)
         {
             if (aevent.id == 0)
             {
@@ -28,7 +28,14 @@ namespace MvcAgenda.Domain.Concrete
             {
                 context.aevent.Find(aevent.id).CopyFrom(aevent);
             }
+            try{
             context.SaveChanges();
+            return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool DeleteEvent(aevent aevent)

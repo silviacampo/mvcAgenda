@@ -1,16 +1,17 @@
-﻿@model MvcAgenda.Domain.Entities.aevent
+﻿@using MvcAgenda.Resources;
+@model MvcAgenda.Domain.Entities.aevent
 
 @{
-    ViewBag.Title = "Add an event";
+    ViewBag.Title = Events.AddTitle;
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>@Events.AddTitle</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true) <!--only display model errors-->
 
     <fieldset>
-        <legend>Event</legend>
+        <legend></legend>
 <div class="row">
     <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
         <div class="editor-label">
@@ -37,11 +38,6 @@
         </div>
     </div>
 </div>
-       
-
-
-
-
    @if (User.Identity.Name == "admin")
    {
        <div class="row">
@@ -58,8 +54,6 @@
         </div>
     </div>
 </div>
-       
-
    }
    else
    {
@@ -81,13 +75,10 @@
     </div>
      <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
                  OR
-            @Html.ActionLink("Add location", "Create", new { controller = "Locations" }, new { target = "_blank" }) 
+            @Html.ActionLink(Events.addLocatinLink, "Create", new { controller = "Locations" }, new { target = "_blank" }) 
      </div>
 </div>
-
-
-
-       <div class="row">
+<div class="row">
     <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
          <div class="editor-label">
             @Html.LabelFor(model => model.startTime)
@@ -100,10 +91,7 @@
         </div>
     </div>
 </div>
- 
-
-
-       <div class="row">
+<div class="row">
     <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
          <div class="editor-label">
             @Html.LabelFor(model => model.endTime)
@@ -116,10 +104,7 @@
         </div>
     </div>
 </div>
-
-
-
-       <div class="row">
+<div class="row">
     <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
         <div class="editor-label">
             @Html.LabelFor(model => model.url)
@@ -134,16 +119,14 @@
 </div>
 <div class="row">
         <div class="col-lg-2 col-md-3 col-sm-1 col-xs-2">
-        @Html.FontAwesomeActionLink("Back to List", "Index", null, "fa fa-hand-o-left")
+        @Html.FontAwesomeActionLink(Events.backToListLink, "Index", null, "fa fa-hand-o-left")
         </div>
         <div class="col-lg-10 col-md-9 col-sm-11 col-xs-10">
-        <input type="submit" value="Save" />
+        <input type="submit" value="@Events.Save" />
         </div>
     </div>
     </fieldset>
 }
-
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

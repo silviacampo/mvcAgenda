@@ -129,10 +129,124 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="eventComments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="eventDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="eventDescriptionMaxLengthMsg" xml:space="preserve">
+    <value>Max 200 char</value>
+  </data>
+  <data name="eventEndTime" xml:space="preserve">
+    <value>Ending</value>
+  </data>
+  <data name="eventEndTimeFutureDateMsg" xml:space="preserve">
+    <value>End time must be a date in the future</value>
+  </data>
+  <data name="eventEndTimeGreaterStartTime" xml:space="preserve">
+    <value>Event cannot finish before staring</value>
+  </data>
+  <data name="eventLocation" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="eventLocationRange" xml:space="preserve">
+    <value>You must choose a location</value>
+  </data>
+  <data name="eventStartTime" xml:space="preserve">
+    <value>Starting</value>
+  </data>
+  <data name="eventStartTimeFutureDateMsg" xml:space="preserve">
+    <value>Start time must be a date in the future</value>
+  </data>
+  <data name="eventStartTimeRequiredMsg" xml:space="preserve">
+    <value>Start time can't be empty</value>
+  </data>
+  <data name="eventTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="eventTitleMaxLengthMsg" xml:space="preserve">
+    <value>Max 50 char</value>
+  </data>
+  <data name="eventTitleRequiredMsg" xml:space="preserve">
+    <value>Title can't be empty</value>
+  </data>
+  <data name="eventUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="eventUrlInvalidMsg" xml:space="preserve">
+    <value>URL is not valid</value>
+  </data>
+  <data name="eventUrlMaxLengthMsg" xml:space="preserve">
+    <value>Max 200 char</value>
+  </data>
+  <data name="eventUrlRequiredMsg" xml:space="preserve">
+    <value>URL can't be empty</value>
+  </data>
+  <data name="eventUser" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="eventUserRange" xml:space="preserve">
+    <value>You must choose a user</value>
+  </data>
   <data name="ItemTitle" xml:space="preserve">
     <value>Event</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
     <value>Events</value>
+  </data>
+  <data name="addLink" xml:space="preserve">
+    <value>Add an event</value>
+  </data>
+  <data name="addLocatinLink" xml:space="preserve">
+    <value>Add a location</value>
+  </data>
+  <data name="AddTitle" xml:space="preserve">
+    <value>Add an event</value>
+  </data>
+  <data name="backToListLink" xml:space="preserve">
+    <value>Back to list</value>
+  </data>
+  <data name="deleteLink" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="detailsLink" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="DetailsTitle" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="editLink" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditTitle" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="eventDeleteConfirmMsg" xml:space="preserve">
+    <value>Are you sure you want to delete?:</value>
+  </data>
+  <data name="eventDeleteErrorMsg" xml:space="preserve">
+    <value>Error:The event cannot be deleted.</value>
+  </data>
+  <data name="eventDeleteSucessMsg" xml:space="preserve">
+    <value>deleted!</value>
+  </data>
+  <data name="eventEditDateConfirmMsg" xml:space="preserve">
+    <value>Are you sure about this change?</value>
+  </data>
+  <data name="eventEditDateErrorMsg" xml:space="preserve">
+    <value>Error:The event dates cannot be modified.</value>
+  </data>
+  <data name="eventEditDateSucessMsg" xml:space="preserve">
+    <value>updated!</value>
+  </data>
+  <data name="ListEmpty" xml:space="preserve">
+    <value>You have not events.</value>
+  </data>
+  <data name="or" xml:space="preserve">
+    <value>OR</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
   </data>
 </root>

@@ -20,13 +20,13 @@
         return token
     }
     function errorHappens() {
-        $('.bottom-right').notify({ message: { text: "Error:The event cannot be deleted."} }).show();
+        $('.bottom-right').notify({ message: { text: "@Events.eventDeleteErrorMsg"} }).show();
     }
     $(document).on("click", ".deleteLink", function (e) {
         var link = $(this).attr("href"); // "get" the intended link in a var
         var html = $(this).parents('.list-group-item');
         e.preventDefault();
-        bootbox.confirm("Are you sure you want to delete?:<br/>" + html.prop('outerHTML'), function (result) {
+        bootbox.confirm("@Events.eventDeleteConfirmMsg<br/>" + html.prop('outerHTML'), function (result) {
             if (result) {
                 var formData = { __RequestVerificationToken: gettoken() };
                 $.ajax({
@@ -37,7 +37,7 @@
                         if (data) {
                             var description = html.find(".list-group-item-heading").text();
                             html.remove();
-                            $('.bottom-right').notify({ message: { text: description + " deleted! "} }).show();
+                            $('.bottom-right').notify({ message: { text: description + " @Events.eventDeleteSucessMsg "} }).show();
                         }
                         else {
                             errorHappens();
@@ -52,8 +52,6 @@
     });
 </script>
 
-
-
 <div class="row">
     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
         <h2>
@@ -61,15 +59,13 @@
     </div>
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
         <p>
-            @Html.ActionLink("Add an event", "Create")
+            @Html.ActionLink(Events.addLink, "Create")
         </p>
     </div>
 </div>
 @if (Model.Items.Count() == 0)
 {
-        <p>
-            You have not events.
-        </p>
+    <p>@Events.ListEmpty</p>
 }
 else
 {
@@ -84,11 +80,11 @@ else
                             @Html.DisplayFor(modelItem => item.description)</h4>
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 tdWLinks">
-                        @Html.FontAwesomeActionLink("Details", "Details", new { id = item.id }, "fa fa-search")
+                        @Html.FontAwesomeActionLink(Events.detailsLink, "Details", new { id = item.id }, "fa fa-search")
                         |
-                        @Html.FontAwesomeActionLink("Edit", "Edit", new { id = item.id }, "fa fa-pencil")
+                        @Html.FontAwesomeActionLink(Events.editLink, "Edit", new { id = item.id }, "fa fa-pencil")
                         |
-                        @Html.FontAwesomeActionLink("Delete", "Delete", new { id = item.id }, "fa fa-trash-o", new { @class = "deleteLink" })
+                        @Html.FontAwesomeActionLink(Events.deleteLink, "Delete", new { id = item.id }, "fa fa-trash-o", new { @class = "deleteLink" })
                     </div>
                 </div>
                 <div class="row">

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MvcAgenda.Domain.Entities.aevent>
+﻿@using MvcAgenda.Resources;
+@model IEnumerable<MvcAgenda.Domain.Entities.aevent>
 @{
     Layout = null;
     UrlHelper url = new UrlHelper(HttpContext.Current.Request.RequestContext);
@@ -12,7 +13,7 @@
         return token
     }
     function errorHappens() {
-        $('.bottom-right').notify({message: { text: "Error!!!"}}).show();
+        $('.bottom-right').notify({message: { text: "@Events.eventEditDateErrorMsg"}}).show();
         revertFunc();
     }
     $(document).ready(function () {
@@ -52,7 +53,7 @@
             return false;
     },
     eventDrop: function(event, delta, revertFunc, jsEvent, ui, view) {
-        var msg = "Are you sure about this change? "+ event.title + " at " + event.start.format('LLL');
+        var msg = "@Events.eventEditDateConfirmMsg "+ event.title + " at " + event.start.format('LLL');
         bootbox.confirm(msg, function(result) {
                     if (!result) {
             revertFunc();
@@ -66,7 +67,7 @@
             data : formData,
             success: function(data) {
             if (data){
-               $('.bottom-right').notify({message: { text: event.title + " moved! " }}).show();
+               $('.bottom-right').notify({message: { text: event.title + " @Events.eventEditDateSucessMsg " }}).show();
             }
             else{
                 errorHappens();            
@@ -83,7 +84,7 @@
     },
         eventResize: function(event, delta, revertFunc) {
 
-        var msg = "Are you sure about this change? "+ event.title + " ending at " + event.end.format('LLL');
+        var msg = "@Events.eventEditDateConfirmMsg "+ event.title + " ending at " + event.end.format('LLL');
         bootbox.confirm(msg, function(result) {
         if (!result) {
             revertFunc();
@@ -97,7 +98,7 @@
             data : formData,
             success: function(data) {
             if (data){
-                $('.bottom-right').notify({message: { text: event.title + " changed! " }}).show();
+                $('.bottom-right').notify({message: { text: event.title + " @Events.eventEditDateSucessMsg " }}).show();
                 }
             else{
                 errorHappens();

@@ -1,16 +1,17 @@
-﻿@model MvcAgenda.Domain.Entities.aevent
+﻿@using MvcAgenda.Resources;
+@model MvcAgenda.Domain.Entities.aevent
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = Events.EditTitle;
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>@Events.EditTitle</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Event</legend>
+        <legend></legend>
 
         @Html.HiddenFor(model => model.id)
             <div class="row">
@@ -61,7 +62,7 @@
         </div>        </div>
         <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
         
-            @Html.DisplayFor(model => model.location.label) OR 
+            @Html.DisplayFor(model => model.location.label) @Events.or 
                 </div>
      <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
             <div class="editor-field">
@@ -121,17 +122,14 @@
     </div>
 <div class="row">
         <div class="col-lg-2 col-md-3 col-sm-1 col-xs-2">
-        @Html.FontAwesomeActionLink("Back to List", "Index", null, "fa fa-hand-o-left")
+        @Html.FontAwesomeActionLink(Events.backToListLink, "Index", null, "fa fa-hand-o-left")
         </div>
         <div class="col-lg-10 col-md-9 col-sm-11 col-xs-10">
-        <input type="submit" value="Save" />
+        <input type="submit" value="@Events.Save" />
         </div>
     </div>
-
     </fieldset>
 }
-
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
