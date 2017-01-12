@@ -60,7 +60,11 @@
         }
         else
         {
-        var formData = {__RequestVerificationToken:gettoken(), id: event.id, strStartTime: event.start.format('LLL'), strEndTime: event.end.format('LLL') };
+                var dateEnd = "";
+        if (event.end != undefined){
+        dateEnd =event.end.format('LLL');
+        }
+        var formData = {__RequestVerificationToken:gettoken(), id: event.id, strStartTime: event.start.format('LLL'), strEndTime: dateEnd };
         $.ajax({
             url: '@editUrl',
             type: "POST",
@@ -83,15 +87,18 @@
 
     },
         eventResize: function(event, delta, revertFunc) {
-
-        var msg = "@Events.eventEditDateConfirmMsg "+ event.title + " ending at " + event.end.format('LLL');
+        var dateEnd = "";
+        if (event.end != undefined){
+        dateEnd =event.end.format('LLL');
+        }
+        var msg = "@Events.eventEditDateConfirmMsg "+ event.title + " ending at " + dateEnd;
         bootbox.confirm(msg, function(result) {
         if (!result) {
             revertFunc();
         }
         else
         {
-        var formData = {__RequestVerificationToken:gettoken(), id: event.id, strStartTime: event.start.format('LLL'), strEndTime: event.end.format('LLL') };
+        var formData = {__RequestVerificationToken:gettoken(), id: event.id, strStartTime: event.start.format('LLL'), strEndTime: dateEnd };
         $.ajax({
             url: '@editUrl',
             type: "POST",

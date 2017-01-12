@@ -176,13 +176,13 @@ namespace MvcAgenda.Controllers
             }
             else
             {
-                string suggestedUID = String.Format("{0} is not available.", username);
+                string suggestedUID = String.Format(Resources.Users.userNameUnavailable, username);
                 for (int i = 1; i < 100; i++)
                 {
                     string altCandidate = username + i.ToString();
                     if (!repository.Users.Any(u => u.username == altCandidate))
                     {
-                        suggestedUID = String.Format("{0} is not available. Try {1}.", username, altCandidate);
+                        suggestedUID = String.Format(Resources.Users.userNameUnavailableAlt, username, altCandidate);
                         break;
                     }
                 }
@@ -201,7 +201,7 @@ namespace MvcAgenda.Controllers
             }
             else
             {
-                string msg = String.Format("{0} is not available.", email);
+                string msg = String.Format(Resources.Users.userEmailUnavailable, email);
                 return Json(msg, JsonRequestBehavior.AllowGet);
             }
         }

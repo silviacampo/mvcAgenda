@@ -227,7 +227,7 @@
           <Property Type="Int32" Name="location_id" Nullable="false" />
           <Property Type="DateTime" Name="startTime" Nullable="false" />
           <Property Type="DateTime" Name="endTime" />
-          <Property Type="String" Name="url" Nullable="false" />
+          <Property Type="String" Name="url" Nullable="true" />
           <NavigationProperty Name="user" Relationship="agendaModel.aevent_ibfk_1" FromRole="aevent" ToRole="user" />
           <NavigationProperty Name="location" Relationship="agendaModel.aevent_ibfk_2" FromRole="aevent" ToRole="location" />
           <NavigationProperty Name="comments" Relationship="agendaModel.comment_ibfk_1" FromRole="aevent" ToRole="comment" />

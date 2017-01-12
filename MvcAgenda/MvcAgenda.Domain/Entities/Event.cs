@@ -83,7 +83,7 @@ namespace MvcAgenda.Domain.Entities
 
         [Display(Name = "eventUrl", ResourceType = typeof(Events))]
         [UIHint("Url")]
-        [Required(AllowEmptyStrings = true, ErrorMessageResourceName = "eventUrlRequiredMsg", ErrorMessageResourceType = typeof(Events))]
+        //[Required(AllowEmptyStrings = true, ErrorMessageResourceName = "eventUrlRequiredMsg", ErrorMessageResourceType = typeof(Events))]
         [StringLength(200, ErrorMessageResourceName = "eventUrlMaxLengthMsg", ErrorMessageResourceType = typeof(Events))]
         [RegularExpression(@"(https?://)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*/?", ErrorMessageResourceName = "eventUrlInvalidMsg", ErrorMessageResourceType = typeof(Events))]
         public global::System.String url { get; set; }

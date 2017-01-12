@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using MvcAgenda.Resources;
 
 namespace MvcAgenda.Domain.Entities
 {
@@ -42,30 +43,27 @@ namespace MvcAgenda.Domain.Entities
         [HiddenInput(DisplayValue = false)]
         public global::System.Int32 id { get; set; }
 
-        [DisplayName("Name")]
-        [Required(ErrorMessage =  "Name can't be empty")]
-        //[Required(ErrorMessageResourceType = typeof(User), ErrorMessageResourceName = "required"))]
+        [Display(Name = "userName", ResourceType = typeof(Users))]
+        [Required(ErrorMessageResourceName = "userNameRequiredMsg", ErrorMessageResourceType = typeof(Users))]
+        [StringLength(20, ErrorMessageResourceName = "userNameMaxLengthMsg", ErrorMessageResourceType = typeof(Users))]
         [Remote("IsUsernameAvailable", "Users", AdditionalFields="id")]
-        [StringLength(20, ErrorMessage = "Max 20 char")]
         public global::System.String username { get; set; }
 
-        [DisplayName("Password")]
-        [Required(ErrorMessage = "Password can't be empty")]
-        //[StringLength(20, ErrorMessage = "Max 20 char")]
+        [Display(Name = "userPassword", ResourceType = typeof(Users))]
+        [Required(ErrorMessageResourceName = "userPasswordRequiredMsg", ErrorMessageResourceType = typeof(Users))]
         [DataType(DataType.Password)]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessageResourceName = "userPasswordMaxLengthMsg", ErrorMessageResourceType = typeof(Users), MinimumLength = 6)]
         public global::System.String password { get; set; }
 
-        [DisplayName("Email")]
-        [Required(ErrorMessage = "E-mail can't be empty")]
+        [Display(Name = "userEmail", ResourceType = typeof(Users))]
+        [Required(ErrorMessageResourceName = "userEmailRequiredMsg", ErrorMessageResourceType = typeof(Users))]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessageResourceName = "userEmailRegExMsg", ErrorMessageResourceType = typeof(Users))]
+        [StringLength(100, ErrorMessageResourceName = "userEmailMaxLengthMsg", ErrorMessageResourceType = typeof(Users))]
         [Remote("IsEmailAvailable", "Users", AdditionalFields = "id")]
-        //[DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]
-        [StringLength(100, ErrorMessage = "Max 100 char")]
         public global::System.String email { get; set; }
 
 
-        [DisplayName("Friends")]
+        [Display(Name = "userFriends", ResourceType = typeof(Users))]
         public List<friend> friends { get; set; }
         
         [DisplayName("Is admin?")]

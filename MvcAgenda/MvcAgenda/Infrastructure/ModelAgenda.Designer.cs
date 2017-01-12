@@ -226,15 +226,13 @@ namespace MvcAgenda.Infrastructure
         /// <param name="title">Initial value of the title property.</param>
         /// <param name="location_id">Initial value of the location_id property.</param>
         /// <param name="startTime">Initial value of the startTime property.</param>
-        /// <param name="url">Initial value of the url property.</param>
-        public static aevent Createaevent(global::System.Int32 id, global::System.String title, global::System.Int32 location_id, global::System.DateTime startTime, global::System.String url)
+        public static aevent Createaevent(global::System.Int32 id, global::System.String title, global::System.Int32 location_id, global::System.DateTime startTime)
         {
             aevent aevent = new aevent();
             aevent.id = id;
             aevent.title = title;
             aevent.location_id = location_id;
             aevent.startTime = startTime;
-            aevent.url = url;
             return aevent;
         }
 
@@ -416,7 +414,7 @@ namespace MvcAgenda.Infrastructure
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String url
         {
@@ -428,7 +426,7 @@ namespace MvcAgenda.Infrastructure
             {
                 OnurlChanging(value);
                 ReportPropertyChanging("url");
-                _url = StructuralObject.SetValidValue(value, false);
+                _url = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("url");
                 OnurlChanged();
             }

@@ -14,7 +14,7 @@ namespace MvcAgenda.Controllers
     //[ActionName("Home")] view should be home
         public ActionResult Index()
         {
-            ViewBag.Message = "Register or log in to manage your information, event and comments.";
+            ViewBag.Message = Resources.Home.homeIndexMsg;
 
             return View("Index");
         }

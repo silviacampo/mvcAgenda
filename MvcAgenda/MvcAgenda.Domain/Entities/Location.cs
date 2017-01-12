@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Web.Mvc;
+using MvcAgenda.Resources;
 
 namespace MvcAgenda.Domain.Entities
 {
@@ -69,33 +70,33 @@ namespace MvcAgenda.Domain.Entities
    {
        public global::System.Int32 id { get; set; }
 
-       [DisplayName("Description")]
-       [Required(ErrorMessage = "Description can't be empty")]
+       [Display(Name = "locationDescription", ResourceType = typeof(Locations))]
+       [Required(ErrorMessageResourceName = "locationDescriptionRequiredMsg", ErrorMessageResourceType = typeof(Locations))]
        public global::System.String description { get; set; }
 
+       [Display(Name = "locationAddress", ResourceType = typeof(Locations))]
        [Remote("IsCityCountryAvailable", "Locations", AdditionalFields = "city, country, user_id, id")]
-       [DisplayName("Address")]
        public global::System.String address { get; set; }
 
-       [DisplayName("Postal Code")]
+       [Display(Name = "locationPostalcode", ResourceType = typeof(Locations))]
        public global::System.String postalcode { get; set; }
 
-       [DisplayName("City")]
-       [Required(ErrorMessage = "City can't be empty")]
+       [Display(Name = "locationCity", ResourceType = typeof(Locations))]
+       [Required(ErrorMessageResourceName = "locationCityRequiredMsg", ErrorMessageResourceType = typeof(Locations))]
+       [StringLength(20, ErrorMessageResourceName = "locationCityMaxLengthMsg", ErrorMessageResourceType = typeof(Locations))]
        [Remote("IsCityCountryAvailable", "Locations", AdditionalFields="address, country, user_id, id")]
-       [StringLength(20, ErrorMessage = "Max 20 char")]
        public global::System.String city { get; set; }
 
-       [DisplayName("Country")]
-       [Required(ErrorMessage = "Country can't be empty")]
+       [Display(Name = "locationCountry", ResourceType = typeof(Locations))]
+       [Required(ErrorMessageResourceName = "locationCountryRequiredMsg", ErrorMessageResourceType = typeof(Locations))]
+       [StringLength(20, ErrorMessageResourceName = "locationCountryMaxLengthMsg", ErrorMessageResourceType = typeof(Locations))]
        [Remote("IsCityCountryAvailable", "Locations", AdditionalFields="address, city, user_id, id")]
-       [StringLength(20, ErrorMessage = "Max 20 char")]
        public global::System.String country { get; set; }
 
-       [DisplayName("Timezone")]
+       [Display(Name = "locationTimezone", ResourceType = typeof(Locations))]
        [UIHint("Timezone")]
-       [Required(ErrorMessage = "TimeZone can't be empty")]
-       [Range(-12, 12, ErrorMessage = "TimeZone can't be more than 12 or less than -12")]
+       [Required(ErrorMessageResourceName = "locationTimezoneRequiredMsg", ErrorMessageResourceType = typeof(Locations))]
+       [Range(-12, 12, ErrorMessageResourceName = "locationTimezoneRangeMsg", ErrorMessageResourceType = typeof(Locations))]
        public global::System.Int32 timezone { get; set; }
    }
 
